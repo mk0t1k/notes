@@ -1,0 +1,550 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage{indentfirst,hyperref,graphicx,xcolor,amsmath,tikz,marvosym,amssymb, wrapfig, ulem}
+\usetikzlibrary{shapes,math}
+
+\makeatletter
+\renewcommand{\boxed}[1]{\text{\fboxsep=.2em\fbox{\m@th$\displaystyle#1$}}}
+\makeatother
+
+\title{Билеты к зачёту по математическому анализу}
+\author{Коткин Михаил}
+\date{\today}
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+\section{Монотонность функции — определение, свойства, связь с чётностью и нечётностью. Монотонность композиции}
+\underline{Опр.} функция f называется монотонно возрастающей если $\forall x_1, x_2 \in D_f: \; x_1 < x_2 \Rightarrow f(x_1) < f(x_2)$ - строго возрастает; $\Rightarrow f(x_1) \leq f(x_2)$ - нестрого возрастает\\
+\underline{Опр.} функция f называется монотонно убывающей если $\forall x_1, x_2 \in D_f: \\ x_1 < x_2 \Rightarrow f(x_1) > f(x_2)$ - строго убывает; $\Rightarrow f(x_1) \geq f(x_2)$ - нестрого убывает\\
+\underline{Теорема(действия с возратающими функциями)}Пусть функции f и g монотонно возрастают тогда:\\
+1)c = const\\
+            если c > 0  h(x) = c * f(x) - возрастает\\
+            если c < 0  h(x) = c * f(x) - убывает\\
+2)h(x) = f(x) + g(x) - возрастает\\
+3)если $\forall x \in D_f \; f(x) \geq 0 \And \forall x \in D_g \; g(x) \geq 0$, то h(x) = f(x) * g(x) - возрастает\\
+если $\forall x \in D_f \; f(x) \leq 0 \And \forall x \in D_g \; g(x) \leq 0$, то h(x) = f(x) * g(x) - убывает\\
+4)если $\forall x \in D_f$ h(x) = $\frac{1}{f(x)}$ - убывает\\
+\underline{Доказательство}:\\
+1)Пусть $x_1 < x_2 \; \forall x_1, x_2 \in D_g (D_g \subset D_f): \; h(x_1) - h(x_2) = c * f(x_1) - c * f(x_2) = c * (f(x_1) - f(x_2)) < 0$(если c < 0) и > 0(если с > 0)\\
+f $\uparrow \; \Leftrightarrow x_1 < x_2 \Rightarrow f(x_1) < f(x_2)$ тогда при c > 0 $h \uparrow$, а при c < 0 $h \downarrow$\\
+\underline{Замечание} $\forall c \in \mathbb{R} \; f \uparrow \Rightarrow h(x) = f(x) + c, h \uparrow$\\
+2)$\forall x_1, x_2 \in D_f: x_1 < x_2 \Rightarrow f(x_1) < f(x_2)$\\
+$\forall x_1, x_2 \in D_g: x_1 < x_2 \Rightarrow g(x_1) < g(x_2)$\\
+$D_h = D_f \cap D_g$\\
+$\forall x_1, x_2 \in D_h$ пусть $x_1 < x_2$ тогда:\\
+$h(x_1) - h(x_2) = f(x_1) + g(x_1) - f(x_1) - g(x_2)= (f(x_1) - f(x_2)) + (g(x_1) - g(x_2)) \\< 0$(так как $f(x_1) - f(x_2) < 0 \And g(x_1) - g(x_2) < 0$) то есть $x_1 < x_2 \Rightarrow h(x_1) < h(x_2) \Rightarrow h \uparrow$\\
+\underline{Замечание}Для разности h(x) = f(x) - g(x) - неверно\\
+3)Пусть $x_1 < x_2 \Rightarrow \forall x_1, x_2 \in D_f: f(x_1) < f(x_2)$\\
+$x_1 < x_2 \Rightarrow \forall x_1, x_2 \in D_g: g(x_1) < g(x_2)$\\
+$D_h = D_f \cap D_g$ тогда $x_1, x_2 \in D_h$ и $x_1 < x_2$\\
+$h(x_1) = f(x_1) * g(x_1), \; h(x_2) = f(x_2) * g(x_2)$\\
+$\left.
+  \begin{array}{cc}\\ 
+0 \leq f(x_1) < f(x_2)\\
+0 \leq g(x_1) < g(x_2)\\
+\end{array} \right\}$ $\Rightarrow h(x_1) < h(x_2) \Rightarrow h \uparrow$\\
+$\left.
+  \begin{array}{cc}\\ 
+f(x_1) < f(x_2) \leq 0\\
+g(x_1) < g(x_2) \leq 0\\
+\end{array} \right\}$ $\Rightarrow$
+$\left.
+  \begin{array}{cc}\\ 
+-f(x_1) > -f(x_2) \geq 0\\
+-g(x_1) > -g(x_2) \geq 0\\
+\end{array} \right\}$ $\Rightarrow h(x_1) > h(x_2)$\\
+$x_1 < x_2 \Rightarrow h(x_1) > h(x_2) \Rightarrow h \downarrow$\\
+4)$x_1 < x_2 \Rightarrow \forall x_1, x_2 \in D_f: f(x_1) < f(x_2)$\\
+$\forall x_1, x_2 \in D_h: x_1 < x_2$ если 0 <$f(x_1) < f(x_2) \Leftrightarrow (f(x_1) < f(x_2)) \; \frac{1}{f(x_2)} < \frac{1}{f(x_1)}$ \\
+если $f(x_1) < f(x_2)< 0 \Leftrightarrow h(x_1) > h(x_2), h \downarrow$\\
+\underline{Теорема(действия с убывающими функциями)} Пусть функции f и g монотонно убывают тогда:\\
+1)c = const\\
+если c > 0 h(x) = c * f(x) - убывает\\
+если c < 0 h(x) = c * f(x) - возрастает\\
+2)h(x) = f(x) + g(x) - убывает\\
+3)если $\forall x \in D_f \; f(x) \geq 0 \And \forall x \in D_g \; g(x) \geq 0$, то h(x) = f(x) * g(x) - убывает\\
+если $\forall x \in D_f \; f(x) \leq 0 \And \forall x \in D_g \; g(x) \leq 0$, то h(x) = f(x) * g(x) - возрастает\\
+4)$\forall x \in D_f$ h(x) = $\frac{1}{f(x)}$ - убывает\\
+
+\underline{Доказательство}:\\
+аналогично теореме о действиях с возрастающими функциями\\
+\underline{Связь монотонности с чётностью}\\
+\underline{Теорема1} Пусть f - чётная тогда f - монотонно возрастает на [a;b] тогда и только тогда, когда f монотонно убывает на [-b;-a]\\
+\underline{Доказательство}:\\
+Возьмём $-b \leq x_1 < x_2 \leq -a \Leftrightarrow a \leq - x_2 < - x_1 \leq b \Leftrightarrow a \leq t_2 < t_1 \leq b$\\
+$f \uparrow [a;b] \Rightarrow f(t_2) < f(t_1) \Rightarrow f(-x_2) < f(-x_1) \Rightarrow$(f - чётная) $f(x_2) < f(x_1)$\\
+то есть $x_1 < x_2 \Rightarrow f(x_1) > f(x_2) \Rightarrow f \downarrow [-b;-a]$\\
+\underline{Теорема2} Пусть f - нечётная тогда f возрастает на [a;b] тогда и только тогда когда она возрастает и на [-b;-a](для убывания тоже верно)\\
+\underline{Доказательство}:\\
+Возьмём $-b \leq x_1 < x_2 \leq a \Leftrightarrow b \geq -x_1 > -x_2 \geq a \Rightarrow(f \uparrow [a;b]) f(-x_2) < f(-x_1) \Rightarrow$ (f — нечётная) $-f(x_2) < - f(x_1) \Leftrightarrow f(x_2) > f(x_1)$\\ то есть $x_1 < x_2 \Rightarrow f(x_1) < f(x_2) \Rightarrow f \uparrow [-b;-a]$\\
+\underline{Теорема(монотонность композиции)} Композиция двух функций одинаковой монотонности - возрастающая функция; композиция двух функций разной монотонности - убывающая функция\\
+\underline{Доказательство}:\\
+z = h(x) = g(f(x)), y = f(x) тогда z = g(y)\\
+1)$f \uparrow, g \downarrow \; h(x) = g(f(x)), h \downarrow$\\
+$\forall x_1, x_2 \in D_f: x_1 < x_2 \Rightarrow f(x_1) < f(x_2)$\\
+$\forall y_1, y_2 \in D_g: y_1 < y_2 \Rightarrow g(y_1) < g(y_2)$\\
+Пусть $\forall x_1, x_2 \in D_h: x_1 < x_2 \Rightarrow f(x_1) < f(x_2) \Leftrightarrow y_1 < y_2 \Rightarrow g(y_1) > g(y_2) \Leftrightarrow z_1 > z_2 \Leftrightarrow h(x_1) > h(x_2)$ то есть $h \downarrow$ на $D_h$\\
+2)$f \uparrow, g \uparrow \; h(x) = g(f(x)), h \uparrow$\\
+$x_1 < x_2 \Rightarrow f(x_1) > f(x_2) \Leftrightarrow y_1 > y_2 \Rightarrow g(y_1) < g(y_2) \Leftrightarrow z_1 < z_2$ то есть $h \uparrow$ на $D_h$\\
+\section{Ограниченность функции — определение, свойства}
+\underline{Опр.} функция f называется ограниченной сверху если $\exists m \in \mathbb{R}:\forall x \in D_f: f(x) \leq m$\\
+\underline{Опр.} функция f называется ограниченной снизу если $\exists k \in \mathbb{R}: \forall x \in D_f: f(x) \geq k$\\
+\underline{Опр.} функция f называется ограниченной если $\exists m > 0: \forall x \in D_f:\\ |f(x)| \leq m$\\
+\underline{Теорема} Функция ограниченна тогда и только тогда, когда она ограниченна сверху и снизу(возможно она не нужна...)\\
+\underline{Доказательство}:\\
+=>: (!)f - огр. $\Rightarrow$ f - огр. сверху и f - огр. снизу\\
+f - огр. $\Leftrightarrow \exists m_0 > 0 : |f(x)| \leq m_0 \Leftrightarrow -m_0 \leq f(x) \leq m_0$\\
+$\exists m = m_0, \exists k = -m_0: \forall x \in D_f: f(x) \leq m \And f(x) \geq k$\\
+<=: (!) f - огр. сверху и f - огр. снизу $\Rightarrow$ f - огр.\\
+$\exists m \forall x \in D_f: f(x) \leq m$\\
+$\exists k \forall x \in D_f: f(x) \geq k$\\
+$M_0$ = max$\{|m|, |k|\}$ тогда |m| $\leq M_0$ и |k| $\geq M_0$\\
+$\forall x \in D_f -M_0 \leq -|k| \leq k \leq f(x) \leq m \leq |m| \leq |M_0|$\\
+то есть $-M_0 \leq f(x) \leq M_0 \Leftrightarrow |f(x)| \leq M_0$\\
+\underline{Теорема1.} Пусть функции f и g ограниченны на множестве X тогда h$_1$(x) = f(x) + g(x), h$_2$(x) = f(x) - g(x), h$_3$(x) = f(x) * g(x), h$_4$(x) = |f(x)| ограниченны на $D_f$\\
+\underline{Доказательство}:\\
+$\exists m > 0: \forall x \in X |f(x)| \leq m$\\
+$\exists k > 0: \forall x \in X |g(x)| \leq k$\\
+$|h_1(x)| = |f(x) + g(x)| \leq |f(x)| + |g(x)| \leq m + k$\\
+$|h_2(x)| = |f(x) + (-g(x))| \leq |f(x)| + |g(x)| \leq m + k$\\
+то есть $\exists m_1 = m + k > 0: \forall x \in X |h_1(x)| \leq m_1 \And |h_2(x)| \leq m_1$\\
+$|h_3(x)| = |f(x)*g(x)| = |f(x)|*|g(x)| < m*k$(так как $|f(x)| \leq m \And |g(x)| \leq k$)\\
+то есть $\exists m_2 = m * k > 0: \forall x \in X |h_3(x)| \leq m_2$\\
+для $h_4$ - аналог ($|h_4(x)| = |f(x)| \leq m$)\\
+\underline{Теорема2.} Пусть функция f ограниченна на X и $\exists m > 0: \forall x \in X |g(x)| > m$ тогда $h(x) = \frac{f(x)}{g(x)}$ - ограниченна на X\\
+\underline{Доказательство}:\\
+$\left.
+  \begin{array}{cc}\\ 
+|g(x)| > m \Leftrightarrow |\frac{1}{g(x)}| < \frac{1}{m}\\
+\exists k > 0 \forall x \in X |f(x)| \leq k\\
+\end{array} \right\}$ $\Rightarrow \frac{1}{|g(x)|} * |f(x)| < \frac{k}{m}$\\
+$|h(x)| = |\frac{f(x)}{g(x)}| = \frac{|f(x)|}{|g(x)|} < \frac{k}{m}$\\
+то есть $\exists m_0 = \frac{m}{k}: \forall x \in X |h(x)| < m_0$\\
+\section{Периодичность функции — определение, свойства}
+\underline{Опр.} функция f называется периодической если $\exists T > 0$:
+1)$\forall x \in D_f (x \pm T) \in D_f$\\
+2)$\forall x \in D_f: f(x + T) = f(x - T) = f(x)$, T - период f\\
+\underline{Замечание} У функции может быть более одного периода. Если в множестве периодов существует наименьший, он назвается - главный\\
+\underline{Теорема1} Если f периодична с периодом $T_0$, $T_0$ - главный период, то все её периоды имеют вид T = n$* T_0, \; n \in \mathbb{N}$\\
+\underline{Доказатество}:\\
+1)(!) $T_0$ - период $\Rightarrow \boxed{n * T_0 = T}$ - тоже период\\
+2)(!) P - период $\Rightarrow \exists n \in \mathbb{N}: P = n * T_0$\\
+I) $T_0$ - период $\Leftrightarrow \forall x \in D_f (x \pm T_0) \in D_f \And \forall x \in D_f: f(x + T_0) = f(x - T_0) = f(x)$\\
+T = $T_0 * n$\\
+то есть (!) $\Leftrightarrow \forall x \in D_f (x \pm T) \in D_f \And \forall x \in D_f: f(x + T) = f(x - T) = f(x)$\\
+ММИ:\\
+1)n = 1: $x \in D_f \And (x \pm T_0) \in D_f \And f(x \pm T_0) = f(x)$\\
+2)Пусть n = k: $x \in D_f \And (x \pm T_0 * k) \in D_f \And f(x \pm T_0 * k) = f(x)$\\
+3)n = k + 1\\
+(!) а)$x \in D_f \Rightarrow (x \pm (k + 1) * T_0) \in D_f$\\
+б)$ x \in D_f \Rightarrow f(x \pm (k + 1) * T_0) = f(x)$\\
+$x \in D_f \Rightarrow (x \pm k * T_0) \in D_f \Rightarrow (x \pm k * T_0 \pm T_0) \in D_f$($T_0$ - период) $\Rightarrow (x \pm (k + 1) * T_0) \in D_f$\\
+$f(x \pm (k + 1) * T_0) = f (x \pm k * T_0 \pm T_0) = f( x \pm k * T_0) = f(x)$\\
+то есть $(k + 1) * T_0$ - период\\
+II)Пусть P - период $P \neq n * T_0, P > 0$\\
+$\exists n \in \mathbb{N} \cup \{0\} \; T = P - n * T_0 \;\; \;  n * T_0 < P < (n + 1) * T_0$\\
+$\forall x \in D_f: f(x \pm T) = f(x \pm P \mp n * T_0) = f(x \mp T_0 * n) = f(x)$\\
+$T = P - n * T_0 < (n + 1) * T_0 - n * T_0 = T_0$ то есть $\exists T < T_0$, T - период ?!!\\
+\underline{Замечание} Если $T_1$ и $T_2$ периоды функции f, то $\forall k, n \in \mathbb{N}: T = n * T_ 1 + k * T_2$ - тоже период\\
+\underline{Теорема2.} Если функции $f_1$ и $f_2$ заданные на $\mathbb{R}$ периодичны: $T_1$ - период $f_1$, $T_2$ - период $f_2$, то $F_1 (x) = f_1(x) + f_2(x); F_2(x) = f_1(x) - f_2(x); F_3(x) = f_1(x) * f_2(x); F_4(x) = \frac{f_1(x)}{f_2(x)}(\forall x \in \mathbb{R} f_2(x) \neq 0)$ периодичны если периоды $T_1$ и $T_2$ соизмеримы то есть $\boxed{\frac{T_1}{T_2} \in \mathbb{Q}^+}$\\
+\underline{Доказательство}:\\
+$\frac{T_1}{T_2} = \frac{p}{q} \in \mathbb{Q}^+ , \; p,q \in \mathbb{N} \Leftrightarrow p * T_2 = q * T_1 = T$\\
+$F_1(x) = f_1(x) + f_2(x), D_{F_1} = \mathbb{R}$\\
+$\forall x \in \mathbb{R}: F_1(x \pm T) = f_1(x \pm T) + f_2(x \pm T) = f_1(x \pm q * T_1) + f_2(x \pm p * T_2) = f_1(x) + f_2(x) = F_1(x)$ то есть T - период функции $F_1$, для $F_2, F_3, F_4$ - аналогично\\
+\underline{Теорема3} Пусть f периодична, T - её главный период, g(x) = f(t(x)), где \\t(x) = ax + b, a > 0 тогда g - периодическая с периодом $T_0 = \frac{T}{a}$\\
+\underline{Доказательство}:(!) $T_0$ - главный период g\\
+1)(!)$T_0$ - период g\\
+$\uwave{x \in D_g} \Leftrightarrow t(x) \in D_f \Leftrightarrow (ax + b) \in D_f \Leftrightarrow (ax + b \pm T) \in D_f \Leftrightarrow\\ (a(x \pm \frac{T}{a}) + b) \in D_f \Leftrightarrow (a(x \pm T_0) + b) \in D_f \Leftrightarrow t(x \pm T_0) \in D_f \Leftrightarrow \uwave{(x \pm T_0) \in D_g}$\\
+$g(x \pm T_0) = f(t(x \pm T_0)) = f(a(x \pm T_0) + b) = f(ax + b \pm aT_0) = f(ax + b + T) = f(ax + b) = f(t(x)) = g(x)$\\
+2)Пусть P < $T_0$, P - период $\Rightarrow \forall x \in D_g: g(x + P) = g(x) = f(t(x + P)) = f(a(x + P) + b) = f(ax + b + aP)$\\
+Но g(x) = f(t(x)) = f(ax + b) тогда f(ax + b + aP) = f(ax + b)\\
+Пусть ax + b = t\\
+$\forall t \in D_f: f(t + aP) = f(t) \Rightarrow aP$ - период f\\
+$P < T_0 \Leftrightarrow aP < T$ ?!!\\
+\section{Взаимно-обратные функции — свойства, монотонность}
+\underline{Опр.}Пусть f:X$\rightarrow$Y биективная функция то есть $\forall x_1, x_2 \in X: x_1 \neq x_2 \Leftrightarrow f(x_1) \neq f(x_2)$, y = f(x) тогда соответствие сопоставляющее каждому y$\in E_f$ - x $\in D_f$ \underline{называется обратной функцией f}($g(y) = f^{-1}(y)$) то есть обратная функция сопоставляет каждому элементу в области значений его прообраз\\
+\underline{Замечание.}1)Графики обратных функция симметричны относительно прямой y = x\\
+2)Точки пересечения с вертикальной осью графика исходной функции - точки пересечения с горизонтальной осью графика обратной функции\\
+3)горизонтальная ассимптота становится вертикальной и наоборот\\
+\underline{Теорема1}$\forall x \in D_f: (f^{-1} \circ f)(x) = x$\\
+$\forall y \in D_{f^{-1}}: (f \circ f^{-1})(y) = y$\\
+\underline{Теорема2} Если f - нечётная и обратимая, то $f^{-1}$ тоже нечётная\\
+\underline{Доказательство}:\\
+y = f(x) $f^{-1}(x) = x = g(y)$\\
+f - нечётная $\Leftrightarrow \left.
+  \begin{array}{cc}\\ 
+\forall x \in D_f\Leftrightarrow -x \in D_f\\
+\forall x \in D_f: f(-x) = -f(x)\\
+\end{array} \right\}$\\
+(!) $\forall y \in D_g \Leftrightarrow -y \in D_f; \; E_g = D_f, D_g = E_f$\\
+1)$\uwave{\forall y \in D_g} g(y) \in E_g \Leftrightarrow x \in E_g \Leftrightarrow x \in D_f \Leftrightarrow -x \in D_f \Leftrightarrow f(-x) \in E_f \Leftrightarrow$\\(f - нечёт.)$-f(x) \in E_f \Leftrightarrow -y \in E_f \Leftrightarrow \uwave{-y \in D_g}$\\
+2)(!)$\forall y \in D_g \; g(-y) = -g(y)$\\
+$\uwave{g(-y)} = g(-f(x)) = g(f(-x)) = -x = \uwave{-g(y)}$\\
+\\
+\\
+\underline{Теорема3} Если f строго монотонна, то $f^{-1}$ тоже строго монотонна, причём сохраняет характер монотонности f\\
+\underline{Доказательство}:\\
+y = f(x) $f^{-1}(x) = x = g(y)$\\
+$f \uparrow \Leftrightarrow \forall x_1, x_2 \in D_f: x_1 < x_2 \Rightarrow f(x_1) < f(x_2)$\\
+Пусть $y_1 < y_2$ докажем, что $g(y_1) < g(y_2)$. Будем доказывать от противного\\
+Пусть $y_1 < y_2 \And g(y_1) \geq g(y_2) \Leftrightarrow y_1 < y_2 \And x_1 \geq x_2 $\\
+1)$x_1 = x_2 \Rightarrow f(x_1) = f(x_2) \Rightarrow y_1 = y_2$ ?!!\\
+2)$x_1 > x_2 \Rightarrow f(x_1) > f(x_2) \Rightarrow y_1 > y_2$ ?!! то есть $g(y_1) < g(y_2)$\\
+\section{Определение предела функции в точке по Коши. Бесконечный предел и предел на бесконечность. Лемма о стабилизации знака, обобщение}
+\underline{Опр.} $x_0$ называется предельной точкой множества A(точка включения) если в каждой окрестности $x_0$ существует хотябы одна точка, принадлежащая A, кроме $x_0\;(\forall \delta > 0 \; \exists x \in A: |x - x_0| < \delta \Rightarrow x \in A)$\\
+\underline{Опр.}(по Коши) Пусть $x_0$ - предельная точка $D_f$, число A - называется пределом f в точке $x_0$ если $\forall \varepsilon > 0 \; \exists \delta >0: \exists x: |x - x_0| <  \delta \And x \neq x_0 \Rightarrow |f(x) - A| < \varepsilon$\\
+\underline{Опр.1}$A = \displaystyle{\lim_{x \to \infty}}f(x)$ если $\forall \varepsilon > 0 \; \exists \delta > 0: |x| > \delta \Rightarrow |f(x) - A| < \varepsilon$\\
+\underline{Опр.2}$A = \displaystyle{\lim_{x \to +\infty}}f(x)$ если $\forall \varepsilon > 0 \; \exists \delta > 0: x > \delta \Rightarrow |f(x) - A| < \varepsilon$\\
+\underline{Опр.3}$A = \displaystyle{\lim_{x \to -\infty}}f(x)$ если $\forall \varepsilon > 0 \; \exists \delta > 0: x < -\delta \Rightarrow |f(x) - A| < \varepsilon$\\
+\underline{Опр.4}$\displaystyle{\lim_{x \to x_0}}f(x) \; = \infty$ если $\forall \varepsilon > 0 \; \exists \delta > 0: |x - x_0| < \delta \And x \neq x_0 \Rightarrow |f(x)| > \varepsilon$\\
+\underline{Опр.5}$\displaystyle{\lim_{x \to x_0}}f(x)\; = +\infty$ если $\forall \varepsilon > 0 \; \exists \delta > 0: 0 < |x - x_0| < \delta \And x \neq x_0 \Rightarrow f(x) > \varepsilon$\\
+\underline{Опр6.}$\displaystyle{\lim_{x \to x_0}}f(x)\; = -\infty$ если $\forall \varepsilon > 0 \; \exists \delta > 0: |x - x_0| < \delta \And x \neq x_0 \Rightarrow \\f(x) < -\varepsilon$\\
+\underline{Опр7.}$\displaystyle{\lim_{x \to \infty}}f(x)\; = \infty$ если $\forall \varepsilon > 0 \; \exists \delta > 0: |x| > \delta \Rightarrow |f(x)| > \varepsilon$\\
+\underline{Опр.8}$\displaystyle{\lim_{x \to \infty}}f(x)\; = +\infty$ если $\forall \varepsilon > 0 \; \exists \delta > 0: |x| > \delta \Rightarrow f(x) > \varepsilon$\\
+\underline{Опр.9}$\displaystyle{\lim_{x \to \infty}}f(x)\; = -\infty$ если $\forall \varepsilon > 0 \; \exists \delta > 0: |x| > \delta \Rightarrow f(x) < -\varepsilon$\\
+\underline{Опр.10}$\displaystyle{\lim_{x \to +\infty}}f(x)\; = \infty$ если $\forall \varepsilon > 0 \; \exists \delta > 0: x > \delta \Rightarrow |f(x)| > \varepsilon$\\
+\underline{Опр.11}$\displaystyle{\lim_{x \to +\infty}}f(x)\; = +\infty$ если $\forall \varepsilon > 0 \; \exists \delta > 0: x > \delta \Rightarrow f(x) > \varepsilon$\\
+\underline{Опр.12}$\displaystyle{\lim_{x \to +\infty}}f(x)\; = -\infty$ если $\forall \varepsilon > 0 \; \exists \delta > 0: x > \delta \Rightarrow f(x) < -\varepsilon$\\
+\underline{Опр.13}$\displaystyle{\lim_{x \to -\infty}}f(x)\; = \infty$ если $\forall \varepsilon > 0 \; \exists \delta > 0: x < -\delta \Rightarrow |f(x)| > \varepsilon$\\
+\underline{Опр.14}$\displaystyle{\lim_{x \to -\infty}}f(x)\; = -\infty$ если $\forall \varepsilon > 0 \; \exists \delta > 0: x < -\delta \Rightarrow f(x) < -\varepsilon$\\
+\underline{Опр.15}$\displaystyle{\lim_{x \to -\infty}}f(x)\; = +\infty$ если $\forall \varepsilon > 0 \; \exists \delta > 0: x < -\delta \Rightarrow f(x) > \varepsilon$\\
+\underline{Лемма}(о стабилизации знака). $\displaystyle{\lim_{x \to x_0}}f(x)\; = A > 0 \Rightarrow \exists \delta > 0: |x - x_0| < \delta \And x \neq x_0 \Rightarrow f(x) > 0$\\
+A < 0 $\Rightarrow \exists \delta > 0: |x - x_0| < \delta \And x \neq x_0 \Rightarrow f(x) < 0$\\
+\underline{Общий случай}:\\
+$\displaystyle{\lim_{x \to x_0}}f(x)\; = A, B < A \And A < C \Rightarrow
+1)\exists \delta > 0: |x - x_0| < \delta \Rightarrow f(x) > B\\
+2)\exists \delta > ): |x - x_0| < \delta \Rightarrow f(x) < C$\\
+\underline{Доказательство}:(общего случая)\\
+$\displaystyle{\lim_{x \to x_0}}f(x)\; = A \Leftrightarrow \forall \varepsilon > 0 \; \exists \delta > 0: |x - x_0| < \delta \And x \neq x_0 \Rightarrow A - \varepsilon < f(x) < A + \varepsilon$\\
+$B < A \Leftrightarrow A - B > 0$\\
+Возьмём $\varepsilon_1 = A - B > 0: \exists \delta_1 > 0: |x - x_0| < \delta_1 \Rightarrow f(x) > A - \varepsilon_1 = B$\\
+Возьмём $\varepsilon_2 = C - A > 0: \exists \delta_2 > 0: |x - x_0| < \delta_2 \Rightarrow f(x) < A + \varepsilon_2 = C$\\
+\underline{Замечание} Лемма о стабилизации знака может не выполняться для предельной точки\\
+\section{Теорема о сжатой переменной. Теорема о локальной ограниченности функции. Предельный переход в неравенстве}
+\underline{Теорема(предельный переход в неравенстве)} $D_f \cap D_g \neq \phi, \displaystyle{\lim_{x \to x_0}}f(x)\; = A,\\ \lim_{x \to x_0}g(x)\; = B, \;\exists \delta_0 > 0: |x - x_0| < \delta_0 \And x \neq x_0$ тогда если f(x) < g(x) $\Rightarrow A \leq B$\\
+\underline{Доказательство}:(от противного)\\
+Пусть $A \leq B \Rightarrow \exists C \in \mathbb{R}: A > C > B$(из аксиом $\mathbb{R}$)\\
+$\exists \delta_1 > 0: |x - x_0| < \delta_1 \And x \neq x_0 \Rightarrow f(x) > C$\\
+$\exists \delta_2 > 0: |x - x_0| < \delta_2 \And x \neq x_0 \Rightarrow g(x) < C$\\
+$\exists \delta = min\{\delta_1;\delta_2;\delta_0\}: |x - x_0| < \delta \And x \neq x_0 \Rightarrow \left.
+  \begin{array}{ccc}\\ 
+f(x) > C\\
+g(x) < C\\
+f(x) < g(x)\\
+\end{array} \right\}$ ?!!\\
+\underline{Теорема(о сжатой переменной)} $D = D_g \cap D_f \cap D_h \neq \phi, x_0$ - предельная точка D; $\exists \delta_0 >0: |x - x_0| < \delta_0 \And x \neq x_0, g(x) < f(x) < h(x)$ причём $\displaystyle{\lim_{x \to x_0}}g(x)\; = \lim_{x \to x_0}h(x) A \Rightarrow \exists \lim_{x \to x_0}f(x) = A$\\
+\underline{Доказательство}:\\
+$\displaystyle{\lim_{x \to x_0}}g(x)\; = A \Leftrightarrow \forall \varepsilon > 0 \; \exists \delta_1 > 0: |x - x_0| < \delta_1 \And x \neq x_0 \Rightarrow |g(x) - A| < \varepsilon$\\
+$\displaystyle{\lim_{x \to x_0}}h(x)\; = A \Leftrightarrow \forall \varepsilon > 0 \; \exists \delta_2 > 0: |x - x_0| < \delta_2 \And x \neq x_0 \Rightarrow |h(x) - A| < \varepsilon$\\
+$\forall \varepsilon > 0 \; \exists \delta = min\{\delta_0;\delta_1;\delta_2\}: |x - x_0| < \delta \And x \neq x_0 \Rightarrow \left.
+  \begin{array}{ccc}\\ 
+g(x) > A -\varepsilon\\
+h(x) < A + \varepsilon\\
+g(x) < f(x) < h(x)\\
+\end{array} \right\}$\\
+$\Rightarrow A - \varepsilon < g(x) < f(x) < h(x) < A + \varepsilon \Rightarrow |f(x) - A| < \varepsilon \Rightarrow \displaystyle{\lim_{x \to x_0}}f(x)\; = A$\\
+\underline{Теорема(о локальной ограниченности)}$x_0$ - предельная точка на $D_f, \displaystyle{\lim_{x \to x_0}}f(x)\; = A$, то f - ограничена в некоторой окрестности точки $x_0 (\exists M_0 > 0: \exists \delta > 0: |x - x_0| < \delta \Rightarrow |f(x)| \leq M_0)$\\
+\underline{Доказательство}:\\
+$\displaystyle{\lim_{x \to x_0}}f(x)\; = A$ возьмём M > |A|$\Leftrightarrow -M < A < M, M > 0$\\
+по лемме о стабилизации знака $\exists \delta_1 > 0: |x - x_0| < \delta_1 \And x \neq x_0 \Rightarrow f(x) < M$\\
+$\exists \delta_2: |x - x_0| < \delta_2 \And x \neq x_0 \Rightarrow f(x) > -M$\\
+$\exists \delta = min\{\delta_1;\delta_2\} > 0: |x - x_0| < \delta \And x \neq x_0 \Rightarrow -M < f(x) < M \Leftrightarrow |f(x)| < M$\\
+Если $x_0 \in D_f$ то есть $\exists f(x_0): M_0 = max\{M;|f(x_0)|\}$ тогда $\forall x \in D_f: |x - x_0| < \delta$\\
+1)$x \neq x_0 \Rightarrow |f(x)| < M \leq M_0$\\
+2)$x = x_0 \Rightarrow |f(x_0)| \leq M_0 \Rightarrow |f(x)| \leq M_0$\\
+\section{Определение предела функции по Гейне. Эквивалентность определений}
+\underline{Опр.}(по Гейне) $x_0$ - предельная точка $D_f, \; \displaystyle{\lim_{x \to x_0}}f(x)\; = A$ если $\forall \{x_n\}: x_n \subset D_f \; \exists N: \forall n \geq N x_n \neq x_0, x_n \rightarrow x_0 \Rightarrow \{f(x_n)\} \rightarrow A$\\
+\underline{Теорема} Два определения предела в точке(по Коши и по Гейне) равносильны\\
+\underline{Доказательство}:\\
+1)опр. Коши $\Rightarrow$ опр. Гейне\\
+Дано: $ \forall \varepsilon > 0 \; \exists \delta > 0: |x - x_0| < \delta \And x \neq x_0 \Rightarrow |f(x) - A| < \varepsilon$\\
+Возьмём $\forall\{x_n\} \rightarrow x_0, x_n \subset D_f: \exists N: \forall n \geq N \; x_n \neq x_0$ \\то есть $\displaystyle{\lim_{x \to \infty}}x_n\; = x_0 \; \Leftrightarrow \forall \varepsilon_0 \; \exists N_1: \forall n \geq N_1: |x_n - x_0| < \varepsilon_0$\\
+$ \uwave{\forall \varepsilon > 0} \; \exists \delta > 0: |x - x_0| < \delta \And x \neq x_0 \Rightarrow |f(x) - A| < \varepsilon$ Пусть $\varepsilon_0 = \delta \; \exists N_1: \forall n \geq N_1: |x_n - x_0| < \delta$\\
+$N_0 = max\{N;N_1\}$ тогда $\uwave{\forall n \geq N_0}: |x_n - x_0| < \delta \And x_n \neq x_0 \Rightarrow \uwave{|f(x_n) - A| < \varepsilon}$ то есть $\displaystyle{\lim_{n \to \infty}}f(x_n)\; = A$\\
+2)опр. Гейне $\Rightarrow$ опр. Каши\\
+от противного то есть $\neg$(опр. Каши) $\And$ (опр. Гейне)\\
+$\neg( \forall \varepsilon > 0 \; \exists \delta > 0: \forall x \neq x_n, |x - x_0| < \delta \Rightarrow |f(x) - A| < \varepsilon) \Leftrightarrow\\ \exists \varepsilon_0 > 0 \; \forall \delta > 0: \exists x \neq x_0: |x - x_0| < \delta \And |f(x) - A| \geq \varepsilon$\\\
+Возьмём $\varepsilon_0$ возьмём $\delta_1: \exists x_1 \neq x_0: |x_1 - x_0| < \delta_1 \And |f(x_1) - A| \geq \varepsilon_0$\\
+возьмём $\delta_2: \; 0 < \delta_2 < \delta_1: \; \exists x_2 \neq x_0: |x_2 - x_0| < \delta_2 \And |f(x_2) - A| \geq \varepsilon_0$\\
+...\\
+Построим $\{\delta_n\} \rightarrow 0$\\
+$\forall n \; \exists x_n \neq x_0: |x_n - x_0| < \delta_n \And |f(x_n) - A| \geq \varepsilon_0$ тогда $0 < |x_n - x_0| < \delta_0 \rightarrow 0$ тогда по теореме о сжатой переменной $|x_n - x_0| \rightarrow 0 \Rightarrow \\b_n = |x_n - x_0| \rightarrow 0 \Rightarrow \{x_n - x_0\} \rightarrow 0 \Rightarrow x_n \rightarrow x_0$\\
+то есть $\forall n \; x_n \neq x_0 \And x_n \rightarrow x_0 \Rightarrow$(по опр. Гейне)$\{f(x_n)\} \rightarrow A\Leftrightarrow \forall \varepsilon > 0 \; \exists N: \; \forall n \geq N: |f(x_n) - A| < \varepsilon$ но $\exists \varepsilon_0: \forall n \; |f(x_n) - A| \geq \varepsilon_0$?!!\\
+\section{Теорема о действиях с пределами функций. Предел композиции функций}
+\underline{Теорема1} $\displaystyle{\lim_{x \to x_0}}f(x)\; = A \And \lim_{x \to x_0}g(x)\; = B \Rightarrow \lim_{x \to x_0}(f(x) + g(x))\; = A + B$\\
+\underline{Доказательство}:\\
+Возьмём $\forall \{x_n\} \rightarrow x_0 \; \exists: \; \forall n \geq N x_n \neq x_0 \Rightarrow \{f(x_n)\} \rightarrow A \And \{g(x)\} \rightarrow B$\\
+h(x) = f(x) + g(x); $h(x_n) = f(x_n) + g(x_n)$\\
+$\displaystyle{\lim_{n \to \infty}}h(x_n)\; = \lim_{n \to \infty}f(x_n) + \lim_{n \to \infty}g(x_n) = A + B$\\тогда по опр. Гейне $ \displaystyle{\lim_{x \to x_0}}h(x)\; = A + B$\\
+\underline{Замечание} Для предела разности, произведения и деления - аналогично\\
+\underline{Теорема(о пределе композиции)} Пусть h(x) = f(g(x)), $\displaystyle{\lim_{x \to x_0}}g(x)\; = b,\\ \lim_{y \to b}f(y)\; = c, \; \exists \delta_0 > 0: |x - x_0| < \delta_0 \And x \neq x_0 \Rightarrow g(x) \neq b$\\ тогда $\exists \displaystyle{\lim_{x \to x_0}}h(x)\; = \lim_{y \to b}f(y)\; = c$\\
+\underline{Доказательство}:\\
+$\uwave{\forall \{x_n\} \rightarrow x_0} \; \exists N \; \forall n \geq N: x_n \neq x_0$\\
+$\displaystyle{\lim_{x \to x_0}}g(x)\; = b \{g(x_n)\} \rightarrow b$ то есть $\displaystyle{\lim_{n \to \infty}}g(x_n)\; = b$\\
+$\displaystyle{\lim_{n \to \infty}}x_n\; = x_0 \Leftrightarrow \forall \varepsilon > 0\; \exists N \; \forall n \geq N: |x_n - x_0| < \varepsilon$\\
+Для $\varepsilon = \delta_0 \; \exists N \forall n \geq N \; |x_n - x_0| < \delta_0 \Rightarrow g(x_n) \neq b$ то есть $\{g(x_n\} \rightarrow b$ тогда $\{y_n\} \rightarrow b \And y_n \neq b \Rightarrow \uwave{\{f(y_n)\} \rightarrow c}$ то есть $\displaystyle{\lim_{x \to x_0}}f(g(x))\; = c$\\
+\section{Замечательный предел, связанный с e}
+\underline{Теорема}$\displaystyle{\lim_{x \to \infty}}(x + \frac{1}{x})^x\; = e$\\
+\underline{Доказательство}:\\
+1)$\forall \{x_n\} \rightarrow + \infty \; \exists N: \; \forall k \geq N \; x_k > 1$\\
+$n_k = [x_k] \; n_k \in \mathbb{N} \; n_k \leq x_k < n_k + 1 (*)$\\
+$\frac{1}{n_k + 1} < \frac{1}{x_k} \leq \frac{1}{n_k}(**)$\\
+(**) $\Rightarrow (1 + \frac{1}{n_k + 1}) < (1 + \frac{1}{x_k}) \leq (1 + \frac{1}{x_k}) \Leftrightarrow (1 + \frac{1}{n_k + 1})^{n_k} < (1 + \frac{1}{x_k})^{n_k} \leq (1 + \frac{1}{x_k})^{n_k}$\\
+$(1 + \frac{1}{n_k + 1})^{n_k} < (1 + \frac{1}{x_k})^{n_k} \leq (1 + \frac{1}{x_k})^{x_k} < (1 + \frac{1}{x_k})^{n_k + 1} \leq (1 + \frac{1}{n_k})^{n_k + 1}$\\
+(1 и 4 знаки по (**), 2 и 3 - по (*))\\
+\\
+$y_k = (1 + \frac{1}{x_k})^{x_k} \; \; \; \; (1 + \frac{1}{n_k + 1})^{n_k} < y_k < (1 + \frac{1}{n_k})^{n_k + 1}$ по теореме о сжатой переменной $y_k \rightarrow e$\\
+$\displaystyle{\lim_{n_k \to \infty}}(1 + \frac{1}{n_k})^{n_k + 1}\; = \lim_{n_k \to \infty}((1 + \frac{1}{n_k})^{n_k} *(1 + \frac{1}{n_k}))\; = e$\\
+$y_k \rightarrow e \; \; f(x) = (1 + \frac{1}{x})^x \; \; f(x_k) = y_k \rightarrow e$ то есть $\displaystyle{\lim_{x \to +\infty}}(x + \frac{1}{x})^x\; = e$
+2)$\forall \{x_n\} \rightarrow - \infty \; \exists N: \; \forall k \geq N \; x_k < -1$\\
+$x_k = - y_k$ тогда $y_k \rightarrow - \infty$\\
+$(1 + \frac{1}{x_k})^{x_k} = (1 + \frac{1}{y_k})^{-y_k} = e$\\
+\section{Односторонние пределы. Критерий существования предела в точке}
+\underline{Опр.} Число A называется пределом функции f в $x_0$ справа если $\forall \varepsilon > 0 \; \\\exists \delta > 0: x_0 < x < x_0 + \delta \Rightarrow |f(x) - A| < \varepsilon, x_0$ - предельная
+точка на $D_f$\\
+\underline{Опр.} Число A называется пределом функции f в $x_0$ слева если $\forall \varepsilon > 0 \; \\\exists \delta > 0: x_0 - \delta < x < x_0\Rightarrow |f(x) - A| < \varepsilon, x_0$ - предельная
+точка на $D_f$
+\underline{Теорема} $\displaystyle{\lim_{x \to x_0}}f(x)\; = A \Leftrightarrow \lim_{x \to x_0+}f(x)\; = A \And \lim_{x \to x_0-}f(x)\; = A$\\
+\underline{Доказательство}:\\
+=>: $\displaystyle{\lim_{x \to x_0}}f(x)\; = A \Leftrightarrow \forall \varepsilon > 0 \; \exists \delta > 0: |x - x_0| < \delta \And x \neq x_0 \Rightarrow |f(x) - A| < \varepsilon$\\
+Пусть $x_0 < x < x_0 + \delta \Rightarrow |x - x_0| < \delta \And x \neq x_0 \Rightarrow |f(x) - A| < \varepsilon \Rightarrow \displaystyle{\lim_{x \to x_0+}}f(x)\; = A$\\
+Пусть $x_0 - \delta < x < x_0 \Rightarrow |x - x_0| < \delta \And x \neq x_0 \Rightarrow |f(x) - A| < \varepsilon \Rightarrow \displaystyle{\lim_{x \to x_0-}}f(x)\; = A$\\
+<=: $\forall \varepsilon > 0 \; \exists \delta_1 > 0 \; x_0 < x < x_0 + \delta_1 \Rightarrow |f(x) - A| < \varepsilon$\\
+$\forall \varepsilon > 0 \; \exists \delta_2 > 0 \; x_0 - \delta_2 < x < x_0 \Rightarrow |f(x) - A| < \varepsilon$\\
+то есть $\lim_{x \to x_0+}f(x)\; = \lim_{x \to x_0-}f(x)$\\
+$\forall \varepsilon > 0 \; \exists \delta = min \{\delta_1;\delta_2\}$\\
+Пусть $|x - x_0| < \delta \And x \neq x_0 \Rightarrow x_0 < x < x_0 + \delta$ или $x_0 - \delta < x < x_0 \Rightarrow x_0 < x < x_0 + \delta_1 \Rightarrow |f(x) - A| < \varepsilon$\\
+$x_0 - \delta < x < x_0 \Rightarrow x_0 - \delta_2 < x < x_0 \Rightarrow |f(x) - A| < \varepsilon \Rightarrow \displaystyle{\lim_{x \to x_0}}f(x)\; = A$\\
+\section{Первый замечательный предел $\displaystyle{\lim_{x \to 0}}\frac{sin x}{x} = 1$. Тригонометрические пределы}
+\\
+\\
+\underline{Теорема(I замечательный предел)}$\displaystyle{\lim_{x \to 0}}\frac{sin x}{x} = 1$
+\underline{Доказательство}:\\
+1)$\displaystyle{\lim_{x \to 0+}}\frac{sin x}{x} = 1 \Leftrightarrow \forall \{x_n\} \rightarrow 0 \; \exists N \; \forall n \geq N \; x_n > 0$\\
+2)$\displaystyle{\lim_{x \to 0-}}\frac{sin x}{x} = 1$\\
+$\displaystyle{\lim_{x \to 0-}}\frac{sin x}{x} = \lim_{x \to 0-}\frac{sin (-x)}{-x} = \lim_{t \to 0+}\frac{sin t}{t} = 1$\\(второй переход возможен т. к. sin чётная функция)\\
+$\displaystyle{\lim_{x \to 0}}\frac{sin x}{x} = \displaystyle{\lim_{x \to 0-}}\frac{sin x}{x} = \displaystyle{\lim_{x \to 0+}}\frac{sin x}{x} = 1$\\
+\section{Свойства и графики прямых и обратных тригонометрических функций}
+\underline{Прямыу триногометрические функции}\\
+$\boxed{1} \; y = sin x$\\
+\begin{wrapfigure}{l}{3.5in}
+\centering 
+\includegraphics[width=3.5in]{pics/sin_1.jpg}
+\end{wrapfigure}
+\begin{wrapfigure}{l}{2.6in}
+\centering 
+\includegraphics[width=2.6in]{pics/cos_1.jpg}
+\end{wrapfigure}
+1)$\forall x \; sin(-x) = -sin x$ то  есть f - нечётная\\
+2)$\forall x \; sin(x \pm 2 \pi) = sin\, x \; T_0 = 2 \pi$\\
+3)$D_f = \mathbb{R} \\ E_f = [-1; 1]$\\
+4)$f(x) = 0 \; x=\pi k, k \in \mathbb{Z}$\\
+график синуса - синусоида\\
+\\
+\\
+5)монотоность (!) $\forall k \in \mathbb{Z} \; f \uparrow [-\frac{\pi}{2} + 2\pi k; \frac{\pi}{2} + 2\pi k]$\\
+$f \downarrow [\frac{\pi}{2} + 2\pi k; \frac{3\pi}{2} + 2\pi k]$\\
+\underline{Доказательство}:\\
+$-\frac{\pi}{2} \leq x_1 < x_2 \leq \frac{\pi}{2}$\\
+рассмотрим $sin \, x_1 - sin \, x_2 = 2 sin\frac{x_1 - x_2}{2}cos \frac{x_1 + x_2}{2} < 0$\\
+$-\frac{\pi}{2} \leq x_1 \leq \frac{\pi}{2} \And -\frac{\pi}{2} \leq x_2 \leq \frac{\pi}{2} \Rightarrow -\frac{\pi}{2} < \frac{x_1 + x_2}{2} < \frac{\pi}{2} \And -\frac{\pi}{2} < \frac{x_1 - x_2}{2} < 0 \Rightarrow sin \, x_1 - sin\, x_2 < 0 \Rightarrow f(x) = sin\, x$\\
+$\boxed{2} \; y = cos x = sin (\frac{\pi}{2} - x)$\\
+1)$D_f = \mathbb{R} \; \; E_f = [-1;1]$\\
+2)$\forall x \in \mathbb{R} \; cos(-x) = cos\,x$ то есть f - чётная\\
+3)корни f(x) = 0 $\; \; x = \frac{\pi}{2} + \pi k, k \in \mathbb{Z}$\\
+\\
+4)периодичность $T_0 = 2\pi \; \forall x \; cos(x \pm 2\pi k ) = cos\, x$\\
+5)монотонность $g(x) = \frac{\pi}{2} - x, g \downarrow \; \; \; \; y = sin(g(x)) \Rightarrow g \downarrow$ на $[2\pi k; \pi + 2\pi k] \And g \uparrow$ на $[\pi + 2\pi k; 2\pi(k + 1)]$\\
+$\boxed{3} \; y = tg\, x = \frac{sin\, x}{cos\, x}$\\
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\linewidth]{pics/tg_1.jpg}
+\label{fig:mpr}
+\end{figure}
+1)$D_f = \mathbb{R} \backslash \{\frac{\pi}{2} + 2\pi k\}, \, k \in \mathbb{Z}; E_f = \mathbb{R}$\\
+2)$\forall x \in D_f: \; tg(-x) = -tg(x) \Rightarrow$ f - нечётная\\
+3)корни $x = \pi k, k \in \mathbb{Z}$\\
+4)периодичность $T_0 = \pi \; \; \forall x \in D_f: f(x \pm \pi) = f(x)$\\
+5)монотонность $-\frac{\pi}{2} < x_1 < x_2 < \frac{\pi}{2}$\\
+$tg\,x_1 - tg\,x_2 = \frac{sin(x_1 - x_2)}{cos\,x_1\,cos\,x_2} < 0$\\
+$-\frac{\pi}{2} < x_1 < \frac{\pi}{2} \And -\frac{\pi}{2} <  x_2 < \frac{\pi}{2} \Rightarrow -\pi < x_1 - x_1 < 0 \Rightarrow f \uparrow (-\frac{\pi}{2}+ \pi k; \frac{\pi}{2} + \pi k)$\\
+6)вертикальная асимптота $cosx = 0 \Leftrightarrow x = \frac{\pi}{2} +\pi k, k \in \mathbb{Z} \; \; \displaystyle{\lim_{x \to \frac{\pi}{2}}}\frac{sin x}{cos x} = \infty$\\
+аналогично $x \rightarrow -\frac{\pi}{2} \Rightarrow tgx \rightarrow \infty$\\
+7)график(развёртка)\\
+$\boxed{4} \; y = ctg\,x = tg(\frac{\pi}{2} - x)$\\
+1)$D_f = \mathbb{R} \backslash \{\pi k \}, \; k \in \mathbb{Z}$\\
+2) $\forall x \in D_f \; \; f(-x)=-f(x)$, f — нечётная, но график не проходит через $(0;0)$\\
+3)корни $x = \frac{\pi}{2} + \pi k, k \in \mathbb{Z}$\\
+4)периодичность $T_0 = \pi$\\
+5)монотоность $f \downarrow (\pi k; \pi + \pi k)$\\
+6)вертикальная асимптота $sin\,x = 0 \Leftrightarrow x = \pi k$\\
+\underline{Обратные триногометрические функции}\\
+$\boxed{1} \;f(x) = sin x|_{[\frac{-\pi}{2};\frac{\pi}{2}]}$\\
+$f^{-1}(x) = arcsin(x) = g(x)$\\
+1)g - нечётная\\
+2)$g \uparrow$\\
+3)$D_g = [-1;1] \; \; E_g = [-\frac{\pi}{2}; \frac{\pi}{2}]$\\
+$\boxed{2} \;f(x) = cos x|_{[0;\pi]}$\\
+$\; \; \; \;f^{-1}(x) = arcos(x) = g(x)$\\
+$D_f = [-1;1] \; \; E_f = [0; \pi]$\\
+$\forall x \in D_f: g(x) \geq 0$\\
+$g \downarrow$\\
+g(0)=$\frac{\pi}{2}$\\
+\section{Равносильные определения непрерывности функции в точке. Виды разрывов}
+\underline{Опр.1} функция f называется непрерывной в точке $x_0$, если:\\
+1)$\exists \delta > 0: \; |x - x_0| < \delta \Rightarrow x \in D_f$\\
+2)$\displaystyle{\lim_{x \to x_0}}f(x)\,= f(x_0)$\\
+\underline{Опр.2} функция f называется непрерывной в точке $x_0$, если:\\
+1)$\exists \delta > 0: \; |x - x_0| < \delta \Rightarrow x \in D_f$\\
+2)$\displaystyle{\lim_{x \to x_0-}}f(x)\,= \lim_{x \to x_0+}f(x)\, = f(x_0)$\\
+\underline{Опр.3} функция f называется непрерывной в точке $x_0$, если:\\
+1)$\exists \delta > 0: \; |x - x_0| < \delta \Rightarrow x \in D_f$\\
+2)$\displaystyle{\lim_{x \to x_0}}(f(x) - f(x_0))\,= 0$\\
+\underline{Опр.4} функция f называется непрерывной в точке $x_0$, если:\\
+1)$\exists \delta > 0: \; |x - x_0| < \delta \Rightarrow x \in D_f$\\
+2)$x = x_0 + \Delta x$\\
+$\displaystyle{\lim_{\Delta x \to 0}}(f(x_0 + \Delta x) - f(x_0))\,= 0$\\
+\underline{Опр.5} функция f называется непрерывной в точке $x_0$, если:\\
+1)$\exists \delta > 0: \; |x - x_0| < \delta \Rightarrow x \in D_f$\\
+2)$\displaystyle{\lim_{\Delta x \to 0}}\Delta f\,= 0$\\
+\underline{Опр.6} функция f называется непрерывной в точке $x_0$, если:\\
+1)$\exists \delta > 0: \; |x - x_0| < \delta \Rightarrow x \in D_f$\\
+2)$ \forall \varepsilon > 0 \; \exists \delta > 0: \; |x - x_0| < \delta \Rightarrow |f(x) - f(x_0)| < \varepsilon$\\
+\underline{Опр.7} функция f называется непрерывной в точке $x_0$, если:\\
+1)$\exists \delta > 0: \; |x - x_0| < \delta \Rightarrow x \in D_f$\\
+2)$\forall \{x_n\} \to x_0 \; \; \{f(x_0)\} \to f(x_0)$
+\begin{figure}[h]
+\includegraphics[width=1.4\linewidth]{pics/photo_5229182061259117768_y.jpg}
+\label{fig:mpr}
+\end{figure}
+\section{Действия с непрерывными функциями. Непрерывность элементарных функций. Непрерывность композиции}
+\underline{Теорема} Если функции f и g непрерывны $x_0$, то функции $F_1(x) = f(x) + g(x); F_2(x) = f(x) - g(x); F_3(x) = f(x)*g(x); F_4 = \frac{f(x)}{g(x)}, g(x) \neq 0$ - непрерывны $x_0$\\
+\underline{Доказательство}:\\
+f и g непр. $\Rightarrow \exists \displaystyle{\lim_{x \to x_0}}f(x)\,= f(x_0) \And \lim_{x \to x_0}g(x)\,= g(x_0)$\\
+по теореме о действиях с пределами: $\displaystyle{\lim_{x \to x_0}}(f(x)+ g(x)\,= \lim_{x \to x_0}f(x) + \lim_{x \to x_0}g(x) = f(x_0) + g(x_0)$ тогда $F_1$ непрерывна по определению, для $F_2, F_3, F_4$ - аналогично\\
+\underline{Непрерывность элементарных функций}:\\
+1)f(x) = ax + b непр. т. к. $\forall x_0: \displaystyle{\lim_{x \to x_0}}f(x)\,= f(x_0)$\\
+\underline{Доказательство}:\\
+а)a = 0 - верно(предел константы)\\
+б)$a \neq 0: \; \forall \varepsilon > 0\; \exists \delta = \frac{\varepsilon}{|a|}$\\
+Если $|x - x_0| < \delta \And x \neq x_0 \Rightarrow |a||x - x_0| < \varepsilon \Leftrightarrow |f(x) - (ax_0 + b)| < \varepsilon$\\
+2)f(x)=$ax^2 + bx + c$ пусть g(x) = bx + c - непр. по 1); h(x) = ax$^2$ -непрерывна как произведение непрерывных тогда f(x) непрерывна как сумма непрерывных\\
+3)$f(x) = a_0x^n + ... + a_n$ можно разбить на сумму непрерывных функций\\
+4)$f(x) = \sqrt{ax + b}, x \geq -\frac{b}{a}$\\
+$\displaystyle{\lim_{x \to x_0}}f(x) = \lim_{x \to x_0}\sqrt{ax + b} = \sqrt{\lim_{x \to x_0}(ax + b)} = \sqrt{ax_0 + b}$(доказано для последовательностей $\Rightarrow$ можно доказать по Гейне...)\\
+5)f(x) = |ax + b|\\
+$\displaystyle{\lim_{x \to x_0}}f(x) = \lim_{x \to x_0}|ax + b| = |\lim_{x \to x_0}(ax + b)| = |ax_0 + b|$(доказано для последовательностей $\Rightarrow$ можно доказать по Гейне...)\\
+6)$f(x) = \sqrt[3]{ax + b}$\\
+7)$f(x) = sin\,x\; f(x) = cos\, x\; f(x) = tg(x) \; f(x) = ctg(x)$ - доказанно в последовательностях\\
+\underline{Теорема(непрерывность композиции)}Пусть f непрерывна в $x_0, f(x_0) = y_0$ g непрерывна в $y_0$ тогда h(x)=g(f(x)) непрерывна при $x = x_0$\\
+\underline{Доказательство}:\\
+f непр. при x =$x_0: \; \forall \varepsilon_0 > 0 \; \exists \delta_0 > 0: |x - x_0| < \delta_0 \Rightarrow |f(x) - f(x_0)| < \varepsilon_0$\\
+g непр. при y =$y_0: \; \forall \varepsilon_1 > 0 \; \exists \delta_1 > 0: |y - y_0| < \delta_1 \Rightarrow |g(x) - g(x_0)| < \varepsilon_1$\\
+(!) h непр. при $x = x_0:\; \forall \varepsilon_2 > 0 \; \exists \delta_2 > 0: |x - x_0| < \delta_2 \Rightarrow |h(x) - h(x_0)| < \varepsilon_2$\\
+$\forall \varepsilon > 0 \exists \delta_1 > 0: |y - y_0| < \delta_1 \Rightarrow |g(y) - g(y_0)| < \varepsilon \Leftrightarrow |h(x) - h(x_0)| < \varepsilon (g(y) = g(f(x)) = h(x))$\\
+Возьмём $\delta_1 = \varepsilon_0 \; \exists \delta_0: |x - x_0| < \delta_0 \Rightarrow |f(x) - f(x_0)| < \delta_1 \Leftrightarrow |y - y_0| < \delta_1 \Rightarrow |h(x) - h(x_0)| < \varepsilon_0$\\
+\section{Теорема о пределе монотонной функции. Непрерывность монотонной функции. Непрерывность обратной функции}
+\underline{Теорема о пределе монотонной функции} Если функция f определена и монотонна на [a; b], то $\forall x_0 \in (a;b) \; \exists \displaystyle{\lim_{x \to x_0+}}f(x); \exists \lim_{x \to x_0-}f(x)$\\
+\underline{Доказательство}:\\
+Пусть $f \uparrow$ на [a; b]\\
+1)$\forall x_0 \in (a;b) \; \forall x \in [a; x_0): \; a \leq x < x_0 \Rightarrow f(x) \leq f(x_0)$ то есть f(x) ограниченна сверху на $[a; x_0) \Rightarrow \exists sup_{[a;x_0]}f(x) = A \Leftrightarrow \forall x \in [a;x_0): f(x) \leq A \And \forall \varepsilon > 0 \; \exists x_1 \in [a; x_0): f(x_1) > A + \varepsilon$\\
+$a \leq x_1 < x_0; \; \forall x \in (x_1; x_0) \; x_1 < x < x_0 \Rightarrow f(x_1)  \leq f(x) \leq f(x_1)$\\
+$A - \varepsilon < f(x_1) \leq f(x) < A < A + \varepsilon$\\
+Пусть $\delta = x_0 - x_1$ тогда $x_0 - \delta < x < x_0$\\
+то есть $\forall \varepsilon > 0 \; \exists x_1 \in [a;x_0) \; \exists \delta = x - x_1 > 0: |f(x) - A| < \varepsilon$ то есть $\displaystyle{\lim_{x \to x_0-}}f(x) = A$\\
+\\
+2)$\forall x_0 \in (a; b) \; \forall x \in (x_0; b]$\\
+$f \uparrow \Leftrightarrow ( x > x_0 \Rightarrow f(x) \geq f(x_0))$ то есть f(x) огр. снизу на $(x_0;b]$\\
+$\Rightarrow \exists inf_{(x_0;b]}f(x) = B \Leftrightarrow \forall x \in (x_0; b]: \; f(x) \geq B \And \forall \varepsilon > 0 \; \exists x_2 \in (x_0; b]: f(x_2) < B + \varepsilon$\\
+$\forall \varepsilon > 0\exists x_1: x_0 < x_1 \leq b \; \; \forall x \in (x_0;x_2) \Rightarrow x_0 < x < x_2 \; \exists \delta x_2 - x_1 > 0$\\
+$f \uparrow: f(x_0) \leq f(x) \leq f(x_2) \Rightarrow B - \varepsilon < f(x_0) \leq f(x) \leq f(x_2) < B + \varepsilon$ то есть $\forall \varepsilon > 0 \exists x_2 \in (x_0;b] \; \exists \delta = x_2 - x_0 > 0: x_0 < x < x_0 + \delta \Rightarrow |f(x) - B| < \varepsilon$ то есть $\displaystyle{\lim_{x \to x_0-}}f(x) = B$\\
+\underline{Следствие} $\displaystyle{\lim_{x \to x_0+}}f(x) = inf_{(x_0;b]}f(x) \And \displaystyle{\lim_{x \to x_0-}}f(x) = sup_{[a;x_0)}f(x)$\\
+\underline{Замечание} Монотонная функция может иметь разрывы только I рода\\
+\underline{Следствие из теоремы Вейерштрассе} Есди f непрерывна на отрезке, то её значения сплошь заполняют [f(a); f(b)].\\
+\underline{Теорема(непрерывность монотонной функции)} Если f монотонна на промежутке <a;b> и f(<a;b>) = <c;d> то f - непрерывна\\
+\underline{Доказательство}:\\
+Пусть $f \uparrow \Rightarrow \forall x_0 \in <a;b> \exists \displaystyle{\lim_{x \to x_0+}}f(x) \And \displaystyle{\lim_{x \to x_0-}}f(x)$\\
+Пусть $\exists x_0 \in <a;b>: \displaystyle{\lim_{x \to x_0+}}f(x) \neq f(x_0)$\\
+$x < x_0 \Rightarrow f(x_0) \leq f(x) \Rightarrow f(x_0) \leq \displaystyle{\lim_{x \to x_0+}}f(x) \Rightarrow f(x_0) < \displaystyle{\lim_{x \to x_0+}}f(x)$\\
+То есть $X_0 < x \Rightarrow f(x_0) < \displaystyle{\lim_{x \to x_0+}}f(x)$\\
+$\forall x > x_0: \; \displaystyle{\lim_{x \to x_0+}}f(x) = inf_{(x_0;b]}f(x) \Rightarrow f(x) \geq \displaystyle{\lim_{x \to x_0+}}f(x)$\\
+Пусть $\displaystyle{\lim_{x \to x_0+}}f(x) = A$\\
+$ x < x_0 \Rightarrow f(x) \leq f(x_0)$
+то есть $f(x) \leq f(x_0) < A \And f(x_0) \geq f(x) \geq A$ ?!!\\
+\underline{Теорема(Непрерывность обратной функции)} Если f задана на <a; b> $\to$ <c;d> строго монотонна и непрерывна, то обратная функция тоже непрерывна и так же монотонна\\
+\section{Наклонная и вертикальная асимптоты к графику функции}
+\underline{Опр.} прямая, заданная уравнением y = ax + b называется наклонной асимптотой к графику функции, если расстояние между этой прямой и графиком функции стремится к 0 при x стремящмся к бесконечности то есть при неограниченном удалении от начала координат\\
+\underline{Опр1.} Прямая называется вертикальной асимптотой к графику функции если расстояние между этой прямой и графиком стремится к бесконечности при x стремящмеся к b\\
+\underline{Теорема} прямая задааная уравнением y = ax + b является асимптотой к графику f тогда и только тогда $a =  \displaystyle{\lim_{x \to \infty}}\frac{f(x)}{x} \And b = \displaystyle{\lim_{x \to \infty}}(f(x) - ax)$\\
+\\
+\underline{Доказательство}:\\
+\begin{wrapfigure}{l}{3.5in}
+\centering 
+\includegraphics[width=3.5in]{pics/photo_5231295421391952788_y.jpg}
+\end{wrapfigure}\\
+$l: y = ax + b, M(x; f(x)), \; \; N(x; l(x))$\\
+$(MH) \bot l$\\
+l - асимптота $\Leftrightarrow |MH| \to 0$\\
+$\displaystyle{\lim_{x \to \infty}}|MH| = 0$\\
+$\displaystyle{\lim_{x \to \infty}}|MN| = 0 \Leftrightarrow \displaystyle{\lim_{x \to \infty}}|f(x) - l(x)| = 0 \Leftrightarrow \displaystyle{\lim_{x \to \infty}}(f(x) - l(x)) = 0 \Leftrightarrow \displaystyle{\lim_{x \to \infty}}(f(x) - (ax + b)) = 0 \Leftrightarrow b = \displaystyle{\lim_{x \to \infty}}(f(x) - ax)$\\
+$|MN| = \frac{|MH|}{cos\, \alpha} \; \; \alpha \neq \frac{\pi}{2}$ так как l - наклонная \\$\Rightarrow cos\, \alpha \neq 0$\\
+$\Leftrightarrow f(x) = ax + b + \alpha(x) \; \; \displaystyle{\lim_{x \to \infty}}\alpha(x) = 0$\\
+$\displaystyle{\lim_{x \to \infty}}\frac{f(x)}{x} = \displaystyle{\lim_{x \to \infty}}\frac{ax + b + \alpha(x)}{x} = a$\\
+\section{Теорема Больциано-Коши о непрерывности функции на отрезке}
+\underline{Первая теорема Больциано-Коши(о существовании корня)} Пусть f заданна на [a;b] и непрерывна причём значения на концах отрезка имеют разные знаки(f(a)*f(b) < 0) тогда существует корень на этом отрезке($\exists c \in (a;b): f(c) = 0$)\\
+\underline{Доказательство}:\\
+1)$a = a_0, \; \; b = b_0$\\
+$c_0$ - середина $[a_0; b_0]$
+a)$f(c_0) = 0$ - доказано\\
+б)Если $f(c_0) > 0 \; \; \; \; a_1 = a_0, b_1 = c_1$\\
+в)Есть $f(x_0) < 0 \; \; \; \; a_1 = c_0, b_1 = b_0$\\
+2)$c_1$ - середина $[a_1;b_1]$\\
+...\\
+$\{[a_n;b_n]\}$ - последовательность вложенных отрезков\\
+$|b_n - a_n| = \frac{|a - b|}{2^n} \Rightarrow \displaystyle{\lim_{n \to \infty}}|b_n - a_n| = 0 \Rightarrow \exists ! c \in [a_n;b_n]$\\
+$\forall n: \; \{a_n\} \uparrow \And \{b_n\} \downarrow \; \; \; \displaystyle{\lim_{n \to \infty}}a_n = \displaystyle{\lim_{x \to \infty}}b_n = c$\\
+$\forall n \; f(a_n) < o \And f(b_n) > 0$\\
+f - непр. на [a;b]$\Rightarrow$ а непр. в c $\Rightarrow \{a_n\} \to c \Rightarrow \{f(a_n)\} \to f(c)$\\
+$\And \{b_n\} \to c \Rightarrow \{f(b_n)\} \to f(c)$\\
+то есть $\exists \displaystyle{\lim_{n \to \infty}}f(b_n) = \displaystyle{\lim_{n \to \infty}}f(a_n) = f(c) \Rightarrow \displaystyle{\lim_{n \to \infty}}f(a_n) \leq 0 \And \displaystyle{\lim_{n \to \infty}}f(b_n) \geq 0$ то есть $f(c) \leq 0 \And f(c) \geq 0 \Rightarrow f(c) = 0$\\
+\underline{Вторая теорем Бальциано-Коши} Если f заданна на [a;b] и непрерывна на нём, то она принимает все значения от f(a) до f(b)\\
+\underline{Доказательство}:\\
+$\forall c \in (f(a); f(b))$ (пусть f(a) < f(b))\\
+$g(x) = f(x) - c$ - непр.\\
+$g(a) = f(a) - c \And g(b) = f(b) - c \Rightarrow f(a) < c < f(b) \Rightarrow g(a) < 0 \And g(b) > 0 \Rightarrow \exists c \in (a;b): g(c) = 0$ то есть g(c) = f(c) - c = 0\\
+\section{Теоремы Вейерштрассе о непрерывности функции на отрезке}
+\underline{Первая теорема Вейерштрассе} Непрерывная на отрезке функция - ограниченна\\
+($f: [a;b] \to \mathbb{R} f$ - непр. $\Rightarrow \exists M, m: \forall x \in [a;b] m \leq f(x) \leq M$)\\
+\underline{Доказательство}:\\
+Пусть $\exists \forall M > 0 \exists x \in [a;b]: \; |f(x)| > M$\\
+возьмём $\forall M = n, n \in \mathbb{N}$\\
+то есть $\forall n \in \mathbb{N} \exists x_n \in [a;b]: \underline{|f(x_n)| > n}$\\
+то есть $\forall n: \; a \leq x_n \leq b$ то есть $\{x_n\}$ - огр $\Rightarrow \exists \{x_{n_k}$ - сходящаяся\\
+то есть $\exists x_0: \{x_{n_k}\} \to x_0 \; a \leq x_{n_k} \leq b\ ;\; \displaystyle{\lim_{n \to \infty}}x_{n_k} = x_0 \Rightarrow a \leq x_0 \leq b$\\
+f - непр. при $x = x_0 \Rightarrow \{x_{n_k}\} \to x_0 \Rightarrow \{f(x_{n_k}\} \to f(x_0)\\$
+то есть $\{x_{n_k}\}$ сход $\Rightarrow$ огр. $\Leftrightarrow \forall k \; \exists M_0 > 0: \; \; |f(x_{n_k})| \leq M_0$\\
+пусть $N = [M_0] + 1$\\
+$\forall k: |f(x_{n_k})| \leq M_0 < N_)$\\
+$n_k \to \infty \; \forall \varepsilon > 0 \; \exists k_0: \; \forall k \geq k_0: n_k > \varepsilon$\\
+$\delta = N_0 \; \exists k_n \forall] k \geq k_0: n_k > N_0 \Rightarrow |f(x_{n_k})| < N_0 < n_k$\\
+Но $\forall k \; |f(x_{n_k})| > n_k$ ?!!\\
+\underline{Вторая теорема Вейерштрассе}Непрерывная функция на [a;b] достигает своего наибольшего и наименьшего значения\\
+\underline{Доказательство}:\\
+по I теореме Вейерштрассе f - огр. $\Rightarrow \exists M \And m: M = sup_{[a;b]}f(x),\\ m = inf_{[a;b]}f(x)$\\
+Пусть $M = sup_{[a;b]}f(x) \Leftrightarrow \forall x \in [a;b] f(x) \leq M \And \forall \varepsilon > 0 \exists x` \in [a;b]: \; f(x`) > M - \varepsilon$\\
+Возьмём $\varepsilon = \frac{1}{n} \; \forall n \in \mathbb{N} \; \exists x_n \in [a;b]: f(x_n) > N - \frac{1}{n}$\\
+$\{x_n\}$ - огр, $\Rightarrow \exists \{x_{n_k}$ - сход. \\то есть $\exists x_0 \in [a;b]: \displaystyle{\lim_{n \to \infty}}x_{n_k} = x_0$\\
+f - непр. при $x = x_0$ то есть $\{x_{n_k}\} \to x_0 \Rightarrow \{f(x_{n_k}\}$ то есть $\displaystyle{\lim_{k \to \infty}}f(x_{n_k}) = f(x_0)$\\
+$\forall k: \; f(x_{n_k}) > M -\frac{1}{n_k} \Rightarrow \displaystyle{\lim_{k \to \infty}}f(x_{n_k}) \geq M - \displaystyle{\lim_{n \to \infty}}\frac{1}{n_k} = M$\\
+$\forall x_{n_k} \in [a;b]: \; f(x_{n_k}) \leq M$\\
+$f(x_0) \leq M \And f(x_0) \geq M \Rightarrow f(x_0) = M$\\
+то есть $\exists X_0 \in [a;b] f(x_0) = sup_{[a;b]}f(x)$\\
+Пусть m = $inf_{[a;b]}f(x) \Leftrightarrow \forall x \in [a;b] f(x) \geq m \And \forall \varepsilon > 0 \; \exists x`` \in [a;b]: \; f(x``) < m + \varepsilon$\\
+...\\
+$f(x_{n_k}) < m + \frac{1}{n_k}$\\
+$f(x_0) \geq m$\\
+...\\
+\end{document} 

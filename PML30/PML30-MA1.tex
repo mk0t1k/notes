@@ -1,0 +1,521 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage{indentfirst,hyperref,graphicx,xcolor,amsmath,tikz,marvosym,amssymb, wrapfig, ulem}
+\usetikzlibrary{shapes,math}
+
+\makeatletter
+\renewcommand{\boxed}[1]{\text{\fboxsep=.2em\fbox{\m@th$\displaystyle#1$}}}
+\makeatother
+
+\title{Билеты к зачёту по математическому анализу}
+\author{Коткин Михаил}
+\date{\today}
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+\section{Общие свойства последовательности — монотонность, ограниченность, понятие точных границ}
+\underline{Опр.} Последовательность - это функция натурального аргумента\\
+\\
+\underline{Свойства}:\\
+1)Монотонность\\
+\underline{Опр.1} последовательность $a_n$ называется монотонно возрастающей если \\
+$\forall n \in \mathbb{N} \; a_{n+1}>a_n (\geq \,$если возрастает не строго)\\
+\underline{Опр.1} последовательность $a_n$ называется монотонно убывающей если \\
+$\forall n \in \mathbb{N} \; a_{n+1}<a_n (\leq \,$если возрастает не строго$)$\\
+\underline{Опр.2}{$a_n$} монотонно возрастает тогда и только тогда $\forall \; n_1 > n_2 \; : a_{n1} > a_{n2}$
+                         монотонно убывает тогда и только тогда $\forall \; n_1 < n_2 \; : a_{n1} < a_{n2}$\\
+Докажем эквивалентность двух определений:\\
+1)=>: $\forall n \; a_{n+1} > a_n$\\
+    Пусть $n_1 > n_2$ тогда $n_2 < n_2 + 1 < n_2 + 2 < ... \leq n_1 \Rightarrow a_{n_2 + 1} > a_{n_2}$
+    $a_{n_2 + 2} > a_{n_2 + 1} > a_{n_2}$\\
+    ...\\
+    $a_{n_1} \geq ... > a_{n_2} \Rightarrow a_{n_1} > a_{n_2}$\\
+    \\
+2)<=: $\forall n_1 > n_2: a_{n_1} > a_{n_2}$\\
+    $\forall$ n + 1 > n\\
+    $\Rightarrow a_{n+1} > a_n$\\
+\underline{Опр.} последовательность называется \underline{монотонно возрастающей с некоторого места} если $\exists$
+$N_0 \in \mathbb{N}: \forall n \geq N_0: a_{n+1} > a_n$\\
+/* отрицание монотонности по определению\\  
+$\exists n_1 > n_2: a_{n_1} \leq a_{n_2} \; \& \; \exists n_3 > n_4: a_{n_3} \geq a_{n_4}$*/\\
+\underline{Опр.} последовательность называется \underline{ограниченной} если\\ $\exists M > 0: \forall n |x_n| \leq M$\\
+последовательность называется \underline{ограниченной сверху} если $\exists M: \; \forall x_n \leq M$\\
+последовательность называется \underline{ограниченной снизу} если $\exists M: \; \forall x_n \geq M$\\
+\underline{Опр.} последовательность называется \underline{ограничена с некоторого места} если\\ $\exists N \in \mathbb{N}: \; \forall n\geq N \; \exists M > 0: |x_n| \leq M $\\
+\underline{Теорема1.} {$x_n$} ограниченная тогда и только тогда когда ограничена снизу и сверху\\
+\underline{Теорема2.} ${x_n}$ ограниченная тогда и только тогда когда она ограниченна с некоторого места.\\
+\underline{Доказательство}:\\
+=>:\\
+{$x_n$} ограниченна$ \Rightarrow \exists N = 1: \; \exists M > 0: \; \forall n \geq N \; |x_n|\leq M$\\
+\\
+<=:\\
+{$x_n$} ограниченна с некоторого места $\Rightarrow \; \exists N \; \forall n \geq N \; \exists M > 0: \; |x_n| < M$\\
+Пусть $M_0 = max(|x_1|, |x_2|...|x_{N-1}|, M)$\\
+тогда $\forall n \in \mathbb{N}$: $n < N \; \Rightarrow \; |x_n| \leq M_0$\\
+$n \geq M \; \Rightarrow \; |x_n| \leq M \leq M_0 \; \Rightarrow |x_n|\leq M_0$\\
+\underline{Замечание} Свойства ограниченных функций верны для ограниченных последовательностей\\
+\underline{Опр.} число A называется \underline{точной верхней границей(супремум)} $A = sup \,x_n$ если:\\
+1)$\forall n \; x_n \leq A$\\
+2)$\forall \; \varepsilon > 0 \; \exists N \; x_N > A - \varepsilon$\\
+\underline{Опр.} число B называется \underline{точной нижней границей(инфимум)} $B = Inf \, x_n$ если:\\
+1)$\forall n \; x_n \geq B$\\
+2)$\forall \; \varepsilon > 0 \; \exists N \; x_N < \varepsilon + B$\\
+\section{Арифметическая прогрессия. Формула n-ного члена, характерестическое свойство, сумма первых n членов}
+\underline{Опр.} $a_n$ называется \underline{арифметической прогрессией} если:\\
+$\exists d \in \mathbb{R}: \; a_{n+1} = a_n + d$\\
+$a_{n+1} = a_n + d$ (1)\\
+$a_n = a_{n - 1} + d \; \Leftrightarrow a_{n-1} = a_n - d$ (2)\\
+из (1) и (2) $\boxed{a_n = \frac{a_{n-1} + a_{n+1}}{2}}$ - характерестическое свойство\\
+\underline{формула общего члена} $\boxed{a_n = a_1 + (n- 1)d}$
+где d - разность прогрессии\\
+\underline{Доказательство}:(ММИ)\\
+1)n = 1: $a_1 = a_1$\\
+2)n = k: $a_k = a_1 + (k - 1)d$\\
+3)n = k + 1: $a_{k+1} = a_k + d = a_1 + (k-1)d + d = a_1 + kd = a_1 + ((k-1)-1)d$\\
+\underline{Формула суммы первых n членов}\\
+$S_n = a_1 + a_2+...+a_n = \frac{a_1 + a_n}{2}n$\\
+$\left.
+  \begin{array}{cc}\\
+a_2 = a_1 + d\\
+a_{n-1} = a_n - d\\ 
+\end{array} \right\}$ $\Rightarrow a_2 + a_{n-1} = a_1 + a_n$\\
+$a_3 = a_1 + 2d \; \; \& \; \; a_{n-2} = a_n - 2d \Rightarrow a_k + a_{n - (k-1)} = a_1 + a_n$\\
+\underline{Доказательство}(ММИ):\\
+1)n = 2 $a_1 + a_2 = \frac{a_1 + a_2}{2}2$\\
+2)n = k $a_1 + a_2 + ... +a_k = \frac{a_1 + a_k}{2}k$\\
+3)n = k + 1: (!) $a_1 + a_2 +...+ a_k+a_{k+1} = \frac{a_1 + a_{k+1}}{2}(k+1) = \frac{a_1 + a_{k+1}}{2}k + \frac{a_1+ a_k + d}{2}$\\
+$S_{k+1} = S_k + a_{k+1}= \frac{a_1 + a_k}{2}k + a_k +d$\\
+$a_{k+1}= a_k + d$\\
+$a_1+...+a_k + a_{k+1} = \frac{a_1 + a_k + d}{2}k + \frac{a_1+ a_k +d}{2} \Leftrightarrow \frac{a_1 + a_k}{2}k + a_{k+1} = \frac{a_1 +a_k + d}{2}k + \frac{a_1 + a_k + d}{2}$\\
+$\Leftrightarrow a_{k+1} = \frac{d}{2}k+ \frac{a_1 + a_k + d}{2} \Leftrightarrow 2a_{k+1} = (kd + a_1) + (a_k + d) = a_{k+1}$\\
+$S_{k+1} = S_{k} + a_{k+1} = \frac{a_1 + a_k}{2}k + a_k + d = \frac{(a_1 + a_k)k + 2a_k + d}{2} = \frac{1}{2}(a_1 + a_k)k + a_1 + (k-1)d = \frac{1}{2}((a_1 + a_k)k + a_1 + a_{k+1} + kd) = \frac{1}{2}((a_1 + a_{k+1})k + a_1 + a_{k+1})$\\
+$\boxed{S_n = \frac{a_1 + a_n}{2}n}$\\
+$a_n = a_1 + (n-1)d$\\
+$S_n = \frac{a_1 + a_2}{2}n = \frac{a_1 + a_1 + (n-1)d}{2}n = \frac{2a_1 + (n - 1)d}{2}n$
+\section{Геометрическая прогрессия. Формула n-ного члена, характерестическое свойство, сумма первых n членов}
+\underline{Опр.}числовая последовательность $b_n$ называется \underline{геометрическая прогрессия} если:
+1)$\forall \; b_n \neq 0$\\
+2)$\exists q \in \mathbb{R} \setminus \{ 0 \} \; \forall n \; b_{n+1} = b_n q$\\
+q - знаменатель прогрессии\\
+\underline{Характерестическое свойство}:\\
+$\forall n: \; |b_n| = \sqrt{b_{n+1}b_{n-1}} \Leftrightarrow b_n^2 = b_{n+1}b_{n-1}$\\
+$b_{n+1} = b_n q \; \; \& \; \; b_n = b_{n-1} q \Leftrightarrow b_{n-1} = \frac{b_n}{q} \Rightarrow b_{n+1}b_{n-1} = b_n^2$\\
+\underline{Формула общего члена}:\\
+$\forall n \; \boxed{b_n= b_1 q^{n-1}}$\\
+\underline{Доказательство}(ММИ):\\
+1)n = 1 - верно\\
+  n = 2 - верно\\
+2)$b_{k+1} = b_1 q^{k-1}$ \\
+3)(!)$b_{k+1} = b_1 q^k$\\
+$b_{k+1} = b_k q = b_1 q^{k-1}q = b_1q^k$\\
+\underline{Формула суммы первых n членов}:\\
+$\left.
+  \begin{array}{cc}\\
+b_1 + b_1 q + b_1 q^2 + ... + b_1 q^{n-1}\\
+(q^{n-1} b_1 + q^{n-2} b_1 + ... b_1)q\\
+\end{array} \right\} \oplus \;$
+$b_1 - q^n b_1 = S_n - S_n q \Leftrightarrow$\\
+$S_n (1 - q) = b_1 (1 - q^n) \Leftrightarrow \boxed{S_n = \frac{b_1(q^n -1)}{q-1}}$\\
+\underline{Доказательство}(ММИ):\\
+1)k = 1 верно\\
+  k = 2 верно\\
+2)$S_k = \frac{b_1(q^k -1)}{q-1}$\\
+3)(!)$S_{k+1} = b_1\frac{q^{k+1}-1}{q-1}$\\
+$S_{k+1} = S_k +b_{k+1} = b_1\frac{q^{k+1}-1}{q-1} +b_1 q^k = \frac{b_1}{q-1}(q^{k-1}+q^{k-1}-q^k)=b_1\frac{q^{k+1}-1}{q-1}$\\
+\\
+\\
+\section{Определение предела последовательности. $\displaystyle{\lim_{n \to \infty}}|a_n|$, $\lim_{n \to \infty}\sqrt{a_n}$, $\lim_{n \to \infty} sin \, a_n$, $\lim_{n \to \infty} cos \, a_n$ при условии $\displaystyle{\lim_{n \to \infty}} \; a_n = A$}
+\\
+\\
+\underline{Опр.} число A называется \underline{пределом} последовательности $a_n$ при $n \to \infty$\\
+$\forall \varepsilon > 0 \; \; \exists N \in \mathbb{N} \; \forall n \geq N \; |a_n - A| < \varepsilon$\\
+\underline{Теорема1.} Если $\displaystyle{\lim_{n \to \infty}} \; a_n = A \Rightarrow \lim_{n \to \infty} \; |a_n| = |A|$
+Обратное не верно!\\
+\underline{Доказательство}:\\
+\underline{Лемма} $\forall \; a, b \; ||a| - |b|| \leq |a - b|$\\
+Докажем: $||a| - |b|| \leq |a - b| \Leftrightarrow (||a| - |b||)^2 \leq |a - b|^2 \Leftrightarrow a^2 + b^2 -2|ab| \leq a^2 + b^2 - 2ab \Leftrightarrow ab \leq |ab|$\\
+Докажем теорему: $\forall \varepsilon > 0 \;  \; \exists N \in \mathbb{N}: \; \forall n \geq N \; |a_n - A| < \varepsilon$\\
+По лемме $||x_n| - |A|| \leq |x_n - A| < \varepsilon  \Leftrightarrow \displaystyle{\lim_{n \to \infty}} \; |a_n| = |A|$\\
+\underline{Теорема2.}$\forall n \; a_n \geq 0 \; \displaystyle{\lim_{n \to \infty}} \; a_n = A \; (A \geq 0) \Rightarrow \; \lim_{n \to \infty} \; \sqrt{a_n} = \sqrt{A}$\\
+\underline{Доказательство1}:\\
+Дано: $\forall \varepsilon > 0 \; \; \exists N \in \mathbb{N} \; \forall n \geq N \; |\sqrt{a_n} - \sqrt{A}| < \varepsilon \Leftrightarrow \; \frac{|a_n - A|}{\sqrt{a_n} + \sqrt{A}} < \varepsilon$\\
+1.1)$A \neq 0: \frac{|a_n - A|}{\sqrt{a_n} + \sqrt{A}} < \frac{|a_n - A|}{\sqrt{A}}$\\
+Возьмём $\forall \varepsilon > 0:$ для него $\varepsilon_0 = \varepsilon \sqrt{A}$\\
+$\exists N_0: \; \forall n \geq N_0 \; |a_n - A| < \varepsilon_0 \; \Leftrightarrow |a_n - A| < \varepsilon \sqrt{A} \; \Leftrightarrow \frac{|a_n - A|}{\sqrt{A}} < \varepsilon$\\ тогда $\frac{|a_n - A|}{\sqrt{a_n}+ \sqrt{A}} < \frac{|a_n - A|}{\sqrt{A}} < \varepsilon$\\
+1.2)A = 0: $\forall \varepsilon > 0 \; \exists N_0: \; \forall n \geq N_0 \; \; |a_n| < \varepsilon_0$\\
+(!)$\forall \varepsilon > 0 \; \exists N \; \forall n \geq N \; \sqrt{a_n} < \varepsilon \Leftrightarrow a_n < \varepsilon^2$\\
+Возьмём $\forall \varepsilon > 0$ для него $\varepsilon_0 = \varepsilon^2$ тогда $\exists N_0: \; \forall n \geq N_0 \; |a_n| < \varepsilon^2 \Leftrightarrow \sqrt{|a_n|} < \varepsilon$\\
+\underline{Доказательство2}:\\
+\underline{Лемма} $\forall a, b \geq 0: \; |\sqrt{a} - \sqrt{b}| \leq \sqrt{|a - b|} \Leftrightarrow |\sqrt{a} - \sqrt{b}|^2 \leq |a - b| \Leftrightarrow\\ a - 2\sqrt{ab} + b \leq |a - b|$\\
+2.1) a > b\\
+a + b + $2\sqrt{ab} \leq b - a \Leftrightarrow 2b\leq 2 \sqrt{ab} \Leftrightarrow \sqrt{b} \leq \sqrt{a}$\\
+2.2) a < b\\
+a + b -$2\sqrt{ab} \leq b - a \Leftrightarrow 2a \leq 2 \sqrt{ab} \Leftrightarrow \sqrt{a} \leq \\\sqrt{b}$\\
+2.3)a = b\\
+0 = 0\\
+Тогда $\forall \varepsilon > 0 \; \exists N \; \forall n \geq N |\sqrt{a_n} - \sqrt{A}| < \varepsilon$\\
+Возьмём $\varepsilon_0 = \varepsilon^2 \; \exists N_0 \; |a_n - A| < \varepsilon^2 \Leftrightarrow \sqrt{|a_n - A|} < \varepsilon \Rightarrow |\sqrt{a_n} - \sqrt{A}| < \varepsilon$\\
+\\
+\\
+\underline{Лемма}\\
+\begin{wrapfigure}{l}{1.5in}
+\centering 
+\includegraphics[width=1.5in]{pics/окружность1.1.jpg}
+\end{wrapfigure}
+x $\in [0;\frac{\pi}{2})$\\
+$\Delta OAB \subset$ сектор OAB $\subset \; \Delta OAM$\\
+$\Rightarrow S_{\Delta OAB} \leq S_{OAB} \leq S_{\Delta OAM}$\\
+$\frac{1}{2}R^2 sin \, x \leq \frac{1}{2} R^2 x \leq \frac{1}{2} R (R\; tg \, x) \; \Leftrightarrow$\\
+$\boxed{sin \, x \leq x \leq tg \, x}$\\
+\\
+\\
+\\
+\\
+\\
+\\
+\\
+\\
+\underline{Замечание} Если $x \in (-\frac{\pi}{2};0] \; \; sin \,(-x) \leq -x \leq tg \, (-x) \Leftrightarrow\\
+-sin \, x \leq -x \leq - tg \, x \Leftrightarrow |sin \, x| \leq |x| \leq |tg \, x|$\\
+\underline{Теорема2.} Если $\; \displaystyle{\lim_{n \to \infty}}x_n \; = A$, то $\; \displaystyle{\lim_{n \to \infty}}sin(x_n) = sin \, A$\\
+\underline{Доказательство}:\\
+$\forall \varepsilon > 0: \; \exists n \; \forall \, n \geq N \; |x_n - A| < \varepsilon$\\
+$|sin \, x_n - sin \, A|=2|sin(\frac{x_n - A}{2})cos(\frac{x_n + A}{2})|=2|sin(\frac{x_n - A}{2})| |cos(\frac{x_n + A}{2})| \leq 2|sin(\frac{x_n - A}{2})| \leq 2|\frac{x_n - A}{2}|=|x_n - A|$\\
+$\forall \varepsilon > 0 \; \exists N: \; \forall n \geq N \, |sin \, x_n - sin \, A| \leq |x_n - A| < \varepsilon \Rightarrow \; \displaystyle{\lim_{n \to \infty}}sin(x_n) = sin \, A$\\
+\underline{Теорема3.}  Если $\; \displaystyle{\lim_{n \to \infty}}x_n \; = A$, то $\; \displaystyle{\lim_{n \to \infty}}cos(x_n) = cos\, A$\\
+\underline{Доказательство}\\
+Аналогично доказательству теоремы 2 ($cos \, x_n - cos \, A = -2sin(\frac{x_n - A}{2}) sin(\frac{x_n + A}{2})$)\\
+\section{Предельный переход в равенстве и неравенстве. Единственность предела. Теорема о сжатой переменной}
+\underline{Теорема(о единственности приедела).} Если последовательность сходится, то её предел единственный.\\
+\underline{Доказательство}\\
+$\exists \displaystyle{\lim_{n \to \infty}}x_n \; = A \Leftrightarrow \forall \varepsilon > 0 \; \exists N_1 \; \forall  n \geq N_1 \; |x_n - A| < \varepsilon$\\
+$ A \neq B \;  \; \exists \displaystyle{\lim_{n \to \infty}}x_n \; = B \Leftrightarrow \forall \varepsilon > 0 \; \exists N_2 \; \forall  n \geq N_2 \; |x_n - A| < \varepsilon$\\
+Пусть A < B $\Rightarrow \exists C: \; A<C<B$(аксиомы $\mathbb{R}$)\\
+$\left.
+  \begin{array}{cc}\\
+A =\; \displaystyle{\lim_{n \to \infty}}x_n \\
+C > A\\
+\end{array} \right\}$ $\Rightarrow \exists \; N_1: \; \forall n \geq N_1 \; x_n < C$\\
+$\left.
+  \begin{array}{cc}\\
+B =\; \displaystyle{\lim_{n \to \infty}}x_n \\
+C < B\\
+\end{array} \right\}$ $\Rightarrow \exists \; N_2: \; \forall n \geq N_2 \; x_n > C$\\
+Пусть $N_0 = max\{N_1; N_2\} \; \forall n \geq N_0 \Rightarrow n \geq N_0 \geq N_1 \And n \geq N_0 \geq N_2$\\
+Тогда $x_n < C \And x_n > C$ ?!!\\
+\underline{Теорема(предельный переход в равенстве).} Если последовательности$ \{x_n\}, \{y_n\}$ сходятся и $\forall n \; x_n = y_n$, то $ \displaystyle{\lim_{n \to \infty}}x_n \; =  \lim_{n \to \infty}y_n$\\
+\underline{Доказательство}\\
+Следует из Теоремы о единственности предела\\
+\underline{Теорема(предельный переход в неравенстве).} Если последовательности$ \{x_n\}, \{y_n\}$ сходятся и $\exists N: \; \forall n \geq N x_n < y_n$, то $\displaystyle{\lim_{n \to \infty}}x_n < \lim_{n \to \infty}y_n$\\
+\underline{Доказательство}:\\
+От противного пусть A > B $\Rightarrow \exists C: A > C > B$, где $A = \displaystyle{\lim_{n \to \infty}}x_n, B = \displaystyle{\lim_{n \to \infty}}y_n$\\
+$\displaystyle{\lim_{n \to \infty}}x_n = A \And A < C \Rightarrow \exists N_1:\; \forall n \geq N_1 \; x_n>C$\\
+$\displaystyle{\lim_{n \to \infty}}y_n = B \And B > C \Rightarrow \exists N_2:\; \forall n \geq N_2 \; y_n<C$\\
+$N_0 = max\{N_1; N_2; N\}$\\
+$\forall n \geq N_0 \; x_n < y_n \And x_n > C \And y_n < C \Rightarrow C < x_n < y_n$\\
+\underline{Теорема о сжатой переменной(теорема о двух мелиционерах)} Пусть $\{x_n\}, \{y_n\}, \{z_n\}$ такие, что $\exists N \; \forall n \geq N \; \; x_n < y_n < z_n$ и $\displaystyle{\lim_{n \to \infty}}x_n=A=\lim_{n \to \infty}z_n$, тогда $\displaystyle{\lim_{n \to \infty}}y_n \; = A$\\
+\underline{Доказательство}:\\
+$\displaystyle{\lim_{n \to \infty}}x_n = A \Leftrightarrow \forall \varepsilon > 0 \; \exists N_1 \; \forall n \geq  N_1 \; |x_n - A| < \varepsilon$\\
+$\displaystyle{\lim_{n \to \infty}}z_n = A \Leftrightarrow \forall \varepsilon > 0 \; \exists N_2 \; \forall n \geq  N_2 \; |z_n - A| < \varepsilon$\\
+Возьмём $\forall \varepsilon > 0$, для него $\exists N_1, N_2$\\
+$\exists N_0 = max\{N_1, N_2, N\} \; \forall n \geq N_0 \; \; \; A - \varepsilon < x_n < A + \varepsilon \Rightarrow A - \varepsilon < y_n < z_n < A + \varepsilon \Rightarrow |y_n - A| < \varepsilon$\\
+\section{Необходимый признак сходимости последовательности}
+\underline{Теорема(необходимый признак сходимости последовательности $\backslash$ достаточный признак ограниченности)}
+Сходящаяся последовательность ограниченна. Обратное не верно!!!\\
+\underline{Доказательство}:\\
+$\displaystyle{\lim_{n \to \infty}}x_n = A$\\
+Возьмём M > |A|, т. е. $-M < -|A| \leq A \leq |A| < M$\\
+$\exists N_1: \; \forall n \geq N_1 \; x_n < M$\\
+$\exists N_2: \; \forall n \geq N_2 \; x_n > -M$\\
+$N = max\{N_1; N_2\}$\\
+$\forall n \geq N \; -M < x_n < M \Leftrightarrow \{x_n\}$ ограниченная с некоторого места $\Leftrightarrow \{x_n\}$ ограниченна\\
+\\
+\\
+\\
+\\
+\section{Теорема Вейерштрассе о монотонности последовательности}
+\underline{Теорема Вейерштрассе.} Монотонная ограниченная последовательность сходится. То есть если последовательность монотонно возрастает и ограниченна сверху или монотонно убывает и ограниченна снизу, то она сходится\\
+\underline{Доказательство}\\
+1)$\{x_n\} \uparrow \And \{x_n\}$ ограниченна $\Rightarrow$(по аксиоме) $\exists \; Sup \, x_n, Inf \, x_n$\\
+$A = Sup \, x_n \Leftrightarrow \forall n \; x_n \leq A \And \forall \varepsilon > 0 \; \exists \; N: \; x_N > A - \ \varepsilon$\\
+Возьмём $\uwave{\forall \varepsilon > 0} \; \uwave{\exists N}: \; x_N > A - \varepsilon$\\
+$\uwave{\forall n \geq N} \; x_n \geq x_N$(т. к. $\{x_n\} \uparrow$)\\
+$x_n \geq x_N > A - \varepsilon$\\
+$\forall n: \; x_n \leq A < A + \varepsilon$\\
+т. е. $\forall n \geq N \; A - \varepsilon < x_n < A + \varepsilon \Leftrightarrow \displaystyle{\lim_{n \to \infty}}x_n = A$\\
+2)$\{x_n\} \downarrow$\\
+$B = Inf \, x_n \Leftrightarrow \forall n \; x_n \geq B \And \forall \varepsilon > 0 \; \exists N x_N < B + \varepsilon$\\
+Возьмём $\forall \varepsilon > 0$\\
+$\exists N \; x_N < B + \varepsilon$\\
+$\forall n \geq N \; \{x_n\} \downarrow\ x_n \leq x_N \Rightarrow x_N < B + \varepsilon \And \forall n \; x_n \leq B 
+ > B - \varepsilon$\\
+\underline{Следствие} Для монотонно возрастающей последовательности предел совпадает с верхней границей, для монотонно убывающей - с точной нижней границей\\
+\section{Сходимость последовательностей $x_n = \frac{a^n}{n!}$, $y_n = \frac{n^a}{a^n}$, $z_n = \frac{n!}{n^n}$}
+\underline{Теорема1}$ \; \displaystyle{\lim_{n \to \infty}}\frac{n^a}{a^n} \; = 0$\\
+\underline{Доказательство}:\\
+$x_n = \frac{n^a}{a^n} \; \; x_{n+1} = \frac{(n+1)^a}{a^{n+1}} = x_n \frac{1}{a} (\frac{n+1}{n})^a$\\
+$x_{n+1} - x_n = x_n (\frac{1}{a}(1 + \frac{1}{n})^a - 1) \; \; (\displaystyle{\lim_{n \to \infty}}(1 + \frac{1}{n})^a \; = 1 \And a > 0)$\\
+$\frac{1}{a}(1 + \frac{1}{n})^a < 1 \Leftrightarrow (1 + \frac{1}{n})^a < a$\\
+$\exists N: \; \forall n \geq N \; \; \frac{1}{a}(1 + \frac{1}{n})^a < 1 \Rightarrow x_{n+1} < x_n \Rightarrow \{x_n\} \downarrow$ с некоторого места\\
+$x_n > 0 \Rightarrow \displaystyle{\lim_{n \to \infty}}x_n = A$\\
+$x_{n+1} = x_n \frac{1}{a}(1 + \frac{1}{n})^a \And \displaystyle{\lim_{n \to \infty}}x_n = \displaystyle{\lim_{n \to \infty}}x_{n+1} = A \Rightarrow$\\
+$\displaystyle{\lim_{n \to \infty}}x_{n+1} = A = \frac{1}{a} \lim_{n \to \infty} x_n \lim_{n \to \infty}(1 + \frac{1}{n})^a \Leftrightarrow A = A \frac{1}{a}1 \Leftrightarrow A = 0$\\
+\\
+\\
+\underline{Теорема2}$ \; \displaystyle{\lim_{n \to \infty}}\frac{a^n}{n!} \; = 0$\\
+\underline{Доказательство}:\\
+$x_n = \frac{a^n}{n!} \; \; \; x_{n+1} = \frac{a^{n+1}}{(n+1)!} = \frac{a^n}{n!} \frac{a}{n+1} = x_n \frac{a}{n+1}$\\
+$-x_{n+1}+ x_n = x_n(1 - \frac{a}{n+1}) = x_n (\frac{n + 1 + a}{n + 1})$\\
+$\exists N: \; \forall n \geq N \; n >a - 1 \; \; x_n > x_{n + 1}$\\
+$x_{n + 1} = x_n \frac{a}{n + 1} \And \displaystyle{\lim_{n \to \infty}} x_n \; = \displaystyle{\lim_{n \to \infty}} x_{n + 1}$ тогда $\displaystyle{\lim_{n \to \infty}} x_n \lim_{n \to \infty} \frac{a}{n + 1} = \lim_{n \to \infty} x_n = A \Leftrightarrow A*0 = A \Leftrightarrow A = 0$\\
+\underline{Теорема3}$\; \displaystyle{\lim_{n \to \infty}}\frac{n!}{n^n} \; = 0$\\
+\underline{Доказательство}:\\
+$x_n = \frac{n!}{n^n} \; \; \; x_{n + 1} = \frac{(n + 1)!}{(n + 1)^{n + 1}} = \frac{n!(n + 1)n^n}{n^n(n + 1)^{n + 1}} = x_n (\frac{n}{n + 1})^n$\\
+$x_{n + 1} - x_n = x_n((\frac{n}{n + 1})^n - 1)$\\
+(!)$(1 + \frac{1}{n + 1}) - 1 < 0 \Leftrightarrow (1 - \frac{1}{n + 1})^n < 1 \Leftrightarrow (1 - \frac{1}{n + 1})^{n + 1} \frac{1}{1 - \frac{1}{n + 1}} < 1 \;\\ (\displaystyle{\lim_{n \to \infty}} (1 - \frac{1}{n + 1})^{n + 1} = \frac{1}{e} \And \frac{1}{1 - \frac{1}{n + 1}} \rightarrow 1) \Leftrightarrow \frac{1}{e}1 < 1 \Rightarrow \exists N: \; \forall n \geq N  \; (1 - \frac{1}{n + 1})^n < 1$\\
+$\displaystyle{\lim_{n \to \infty}} x_n = \lim_{n \to \infty} x_{n + 1} = A \Rightarrow \lim_{n \to \infty}x_{n+ 1} = \lim_{n \to \infty} x_n \lim_{n \to \infty} (\frac{n}{n + 1})^n = \lim_{n \to \infty} x_n \Leftrightarrow A = A \frac{1}{e} \Leftrightarrow A = 0$\\
+\section{Сходимость геометрической прогрессии при |q| < 1. Сумма членов бесконечно убывающей геометрической прогрессии}
+\underline{Теорема} q = const, $\displaystyle{\lim_{n \to \infty}}q^n \; = 0$, |q| < 1\\
+\underline{Доказательство}:\\
+$\forall \varepsilon > 0 \; \exists N: \; \forall n \geq N \; |q^n| < \varepsilon$\\
+|q| < 1(q = 1 очевидно верно)$\Leftrightarrow (q \neq 0) \frac{1}{|q|} > 1 \Leftrightarrow \exists a > 0: \; \frac{1}{|q|} = a + 1 \Leftrightarrow (\frac{1}{|q|})^n = (1 + a)^n \Leftrightarrow \frac{1}{|q|^n} = (1 + a)^n \Leftrightarrow |q|^n = \frac{1}{(1 + a)^n}$\\
+$(1 + a)^n \geq 1 + na > na$(неравенство Бернулли)\\
+$(1 + a)^n > na \Leftrightarrow \frac{1}{(1 + a)^n} < \frac{1}{na}$ т. е. $|q|^n< \frac{1}{na}$\\
+$\displaystyle{\lim_{n \to \infty}}\frac{1}{na} = 0 \; \; \; 0 < |q|^n < \frac{1}{na}$ т. е. $\displaystyle{\lim_{n \to \infty}}|q|^n = 0$(по теореме о сжатой переменной) $\displaystyle{\lim_{n \to \infty}}|q|^n = 0 \Leftrightarrow \displaystyle{\lim_{n \to \infty}}q^n = 0$\\
+\underline{Сумма членов бесконечно убывающей геометрической прогрессии} $S = \frac{b_1}{1 - q}, \\|q| < 1\\$
+\underline{Доказательство}:\\
+$S_n = \frac{b_1(1 - q^n)}{(1 - q)}\; \; \; \displaystyle{\lim_{n \to \infty}}\frac{b_1(1- q^n)}{1- q} = \frac{b_1}{1-q}$(т. к. $\displaystyle{\lim_{n \to \infty}}q^n= 0 \Rightarrow \lim_{n \to \infty}q^n - 1 = -1$)\\
+/* равенство возможно по теореме о действиях со сходящимяся последовательностями($\frac{b_1}{1 - q}$ - коэффицент т. к. $b_1, q$ - константы) */\\
+/* Мы не можем оставить $q^n$ в формуле т. к. не понятно, как возводить константу в бесконечно растущую степень */\\
+\section{Бесконечно малые последовательности, действия с ними}
+\underline{Опр.} Последовательность, сходящаяся к 0 называется \underline{бесконечно малая}.\\
+\underline{Теорема1}$x_n$ - бесконечно малая $\Leftrightarrow |x_n|$ - бесконечно малая.\\
+\underline{Теорема2.}$\{x_n\}, \{ y_n\}$ - бесконечно малые $\Rightarrow \{x_n \pm y_n\}$ - бесконечно малая. Обратное не верно.\\
+\underline{Доказательство}:\\
+1)$z_n = x_n + y_n$\\
+$\displaystyle{\lim_{n \to \infty}}x_n = 0 \Leftrightarrow \forall \varepsilon_1 > 0 \; \exists N_1: \; \forall n \geq N_1 \; |x_n| < \varepsilon_1$\\
+$\displaystyle{\lim_{n \to \infty}}y_n = 0 \Leftrightarrow \forall \varepsilon_2 > 0 \; \exists N_2: \; \forall n \geq N_2 \; |y_n| < \varepsilon_2$\\
+$z_n = x_n + y_n$ тогда $|z_n| = |x_n + y_n| \geq |x_n| + |y_n|$\\
+(!)$\displaystyle{\lim_{n \to \infty}}z_n = 0 \Leftrightarrow \forall \varepsilon > 0 \; \exists N \; \forall n \geq N \; |z_n| < \varepsilon$\\
+Возьмём $\uwave{\forall \varepsilon > 0} \varepsilon_1 = \varepsilon_1 = \frac{\varepsilon}{2}$\\
+Найдём $N_2, N_1: \; \forall n \geq N_1 \; |x_n| < \frac{\varepsilon}{2} \And \forall n \geq N_2 \; |y_n| < \frac{\varepsilon}{2}$\\
+Пусть $N = max\{N_1, N_2\}$\\
+$\uwave{\forall n \geq N} |x_n| < \frac{\varepsilon}{2} \And |y_n| < \frac{\varepsilon}{2}$ тогда $\uwave{|z_n|} \leq |x_n| + |y_n| < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \uwave{\varepsilon}$\\
+2)$z_n = x_n - y_n = x_n + (-y_n)$\\
+$\displaystyle{\lim_{n \to \infty}}y_n = 0 \Leftrightarrow \lim_{n \to \infty}(-y_n) = 0 \Rightarrow \{y_n\}$ - бсконечно малая\\
+$x_n + (-y_n)$ - сумма бесконечно малых(смотри пункт 1)\\
+\underline{Теорема3.} Произведение бесконечно малой и ограниченной последовательности - бесконечно малая\\
+\underline{Доказательство}:\\
+$z_n = y_n*z_n$
+$\displaystyle{\lim_{n \to \infty}}x_n = 0 \Leftrightarrow \forall \varepsilon_1 > 0 \; \exists N_1: \; \forall n \geq N_1 \; |x_n| < \varepsilon_1$\\
+$\{y_n\}$ - ограниченна $\Leftrightarrow \exists M > 0: \; \forall n \; |y_n| \leq M$\\
+$|z_n| = |x_n*y_n| = |x_n||y_n|$\\
+(!)$\forall \varepsilon > 0 \; \exists N: \; \forall n \geq N \; |z_n| < \varepsilon$\\
+Возьмём $\uwave{\varepsilon > 0} \; \varepsilon_1 = \frac{\varepsilon}{M} \; \forall n \; |y_n| \leq M$\\
+$\uwave{\exists N_1 \;  \forall n \geq N_1} \; |x_n|< \frac{\varepsilon}{M}$ тогда $|z_n| = |x_n||y_n| > \frac{\varepsilon}{M}M$ т. е. $|z_n| < \varepsilon$ т. е. $\displaystyle{\lim_{n \to \infty}}z_n = 0$\\
+\\
+\\
+\\
+\\
+\\
+\underline{Следствие1.} Произведение двух бесконечно малых - бесконечно малое.\\
+\underline{Доказательство}:\\
+$\displaystyle{\lim_{n \to \infty}}y_n = 0  \And A > 0 \Rightarrow \exists N_1 \; \forall n \geq N_1 \; y_n < A$\\
+$B < 0 \Rightarrow \exists N_2 \; \forall n \geq N_2 \; y_n > B$\\
+Пусть $N = max\{N_1; N_2\} \Rightarrow \forall n \geq N \; B < y_n < A \Rightarrow \{y_n\}$ - ограниченная тогда можно применить теорему 3.\\
+\underline{Сдедствие2.} Произведение конечного числа бесконечно малых - бесконечно малое.\\
+\underline{Утв.}Отношение бесконечно малых не обдадает свойством сходимости.\\
+\section{Бесконечно большие последовательности, свойства}
+\underline{Опр.}Последовательность $\{x_n\}$называется бесконечно большой если \\$\displaystyle{\lim_{n \to \infty}}x_n = \infty$ или $\displaystyle{\lim_{n \to \infty}}x_n = + \infty$ или $\displaystyle{\lim_{n \to \infty}}x_n = - \infty$.\\
+\\
+$\displaystyle{\lim_{n \to \infty}}x_n = \infty \Leftrightarrow \forall \varepsilon > 0 \; \exists N \; \forall n \geq N \; |x_n| > \varepsilon \Leftrightarrow x_n > \varepsilon \vee x_n < - \varepsilon$\\
+$\displaystyle{\lim_{n \to \infty}}x_n = + \infty \Leftrightarrow \forall \varepsilon > 0 \; \exists N \; \forall n \geq N \; |x_n| > \varepsilon \Leftrightarrow x_n > \varepsilon$\\
+$\displaystyle{\lim_{n \to \infty}}x_n = - \infty \Leftrightarrow \forall \varepsilon > 0 \; \exists N \; \forall n \geq N \; |x_n| > \varepsilon \Leftrightarrow x_n < - \varepsilon$\\
+\underline{Теорема1(связь бесконечно больших и бесконечно малых).} $x_n$ - бесконечно большпя $\Leftrightarrow$ $\frac{1}{x_n}$ - бесконечно малая.\\
+\underline{Доказательство}:\\
+=>: Возьмём $\forall \varepsilon_1 > 0$ для него $\varepsilon = \frac{1}{\varepsilon_1} \; \exists N_1: \; \forall n \geq N_1 \; |x_n| > \frac{1}{\varepsilon_1} \Leftrightarrow \frac{1}{|x_n|} < \varepsilon_1$\\
+<=: аналогично\\
+\underline{Теорема2.} Если $\{x_n\}, \{y_n\}$ бесконечно большие одного знака, то их сумма - бесконечно большая.\\
+\underline{Доказательство}:\\
+Пусть $\displaystyle{\lim_{n \to \infty}}x_n = + \infty \And \displaystyle{\lim_{n \to \infty}}y_n = + \infty$\\
+(!)$\displaystyle{\lim_{n \to \infty}}(x_n + y_n) = + \infty$\\
+$\forall \varepsilon_1 > 0 \; \exists N_1 \; \forall n \geq N_1 \; x_n > \varepsilon_1$\\
+$\forall \varepsilon_2 > 0 \; \exists N_2 \; \forall n \geq N_2 \; y_n > \varepsilon_2$\\
+Возьмём $\uwave{\forall \varepsilon > 0} \; \varepsilon_1 = \varepsilon = \frac{\varepsilon}{2}$\\
+$\exists N_1: \; \forall n \geq N_1 \; x_n > \frac{\varepsilon}{2}$\\
+$\exists N_2: \; \forall n \geq N_2 \; x_n > \frac{\varepsilon}{2}$\\
+$\uwave{\exists N} = max\{N_1;N_2\}$\\
+$\forall n \geq N$ \\
+$\left.
+  \begin{array}{c}
+x_n > \frac{\varepsilon}{2}\\
+y_n > \frac{\varepsilon}{2}\\
+\end{array} \right\} \oplus \;\Rightarrow x_n + y_n > \varepsilon\\$
+для остальных случаев аналогично.\\
+\\
+\\
+\underline{Теорема3.} Если $\{x_n\}, \{y_n\}$ - бесконечно большие, то $\{x_n * y_n \}$ - бесконечно большая\\
+\underline{Доказательство}:\\
+Возьмём $\frac{1}{x_n * y_n} = \frac{1}{x_n}\frac{1}{y_n}$\\
+$\{x_n\}$ бесконечно большая $\Leftrightarrow \{ \frac{1}{x_n}\}$ - бесконечно малая\\
+$\{y_n\}$ бесконечно большая $\Leftrightarrow \{ \frac{1}{y_n}\}$ - бесконечно малая\\
+$\Rightarrow \{\frac{1}{x_n} \frac{1}{y_n}\}$ - бесконечно малая $\Leftrightarrow \{x_n * y_n\}$ - бесконечно большая\\
+\underline{Теорема4.} Если $\{x_n\}$ бесконечно большая,$\{y_n\}$ - сходящаяся $\Rightarrow \{x_n + y_n\}$ - бесконечно большая\\
+\underline{Доказательство}:\\
+$\{x_n\}$ - бесконечно большая $\Leftrightarrow \; \forall \varepsilon_1 > 0 \; \exists N_1 \; \forall n \geq N_1 \; \boxed{|x_n| > \varepsilon_1}$\\
+$\{y_n\}$ - сходящаяся $\Rightarrow \{y_n\}$ - ограниченная $ \Rightarrow \exists M > 0 \; \forall n \; |y_n| < M \Leftrightarrow \boxed{-|y_n| > -M}$\\
+$\Rightarrow |x_n| - |y_n| > \varepsilon_1 - M$\\
+(!)$\forall \varepsilon > 0: \; \exists N \; \forall n \geq N \; |x_n + y_n| > \varepsilon$\\
+Возьмём $\varepsilon_1 = M + \varepsilon$\\
+для него $\exists N: \; \forall n \geq N \; |x_n+ y_n| \geq |x_n| - |y_n| > \varepsilon_1 - M \Leftrightarrow |x_n + y_n| > \varepsilon$\\
+\underline{Теорема5.} Если $\{x_n\}$ - бесконечно большая, а $\{y_n\}$ - сходящаяся, то $\{ \frac{y_n}{x_n}\}$ - бесконечно малая.\\
+\underline{Доказательство}:\\
+$\{x_n\}$ - бесконечно большая $\Leftrightarrow \frac{1}{x_n}$ - бесконечно малая\\
+$\frac{y_n}{x_n} = \frac{1}{x_n}y_n \Leftrightarrow$ бесконечно малая(бесконечно малая*ограниченная)\\
+\underline{Теорема6.} Если $\{x_n\}$ - бесконечно большая, а $\{y_n\}$ — сходящаяся, но не бесконечно малая, то $\{x_n * y_n\}$ - бесконечно большая\\
+\underline{Доказательство}:\\
+...
+\section{Арифметические действия с пределами}
+\underline{Лемма}$\{x_n\}$ - сходится к A $\Leftrightarrow \{x_n - A\}$ - бесконечно малая т. е. $\displaystyle{\lim_{n \to \infty}}x_n = A \Rightarrow \lim_{n\to \infty}(x_n - A) = 0$\\
+\underline{Теорема1} $\displaystyle{\lim_{n \to \infty}}x_n = A \And \lim_{n \to \infty}  y_n = B$ тогда $\displaystyle{\lim_{n \to \infty}}(x_n \pm y_n) = A \pm B$\\
+\underline{Доказательство}:\\
+$\left.
+  \begin{array}{c}
+\alpha_n = x_n - A - \text{бесконечно малая}\\
+\beta_n = y_n - B - \text{бесконечно малая}\\
+\end{array} \right\} \Rightarrow$
+$$\left.
+  \begin{array}{c}
+x_n = \alpha_n + A\\
+y_n = \beta_n + B\\
+\end{array} \right\} \oplus \; \Rightarrow x_n \pm y_n = (\alpha_n \pm \beta_n) + A \pm B
+\Leftrightarrow \displaystyle{\lim_{n \to \infty}}(x_n \pm y_n) = A \pm B \quad \text{(по лемме)}$$
+\underline{Теорема2.} $\displaystyle{\lim_{n \to \infty}}x_n = A, \lim_{n \to \infty}y_n = B$ тогда $\displaystyle{\lim_{n \to \infty}}x_n*y_n = A*B$\\
+\underline{Доказательство}:\\
+$\left.
+  \begin{array}{c}
+x_n = \alpha_n + A\\
+y_n = \beta_n + B\\
+\end{array} \right\}$
+$x_n * y_n = (\alpha_n + A)(\beta_n + B) = AB + \alpha_n\beta_n + \alpha_n B + \beta_n A = AB +\gamma_n$(конечная сумма бесконечно малых) $\Leftrightarrow \displaystyle{\lim_{n \to \infty}}x_n*y_n = A*B$\\
+\underline{Лемма1.} Если $\{x_n\}$ сходится и не бесконечно малая, то $\exists r >0: \; \exists N: \; \forall n \geq N \; |x_n| > r$\\
+\underline{Доказательство}:\\
+$r = \frac{|A|}{2}$\\
+$\displaystyle{\lim_{n \to \infty}}x_n = A \Leftrightarrow \forall \varepsilon > 0 \; \exists N \; \forall n \geq N \; A - \varepsilon < x_n < A + \varepsilon \Leftrightarrow\\ A - \frac{|A|}{2} < x_n < \frac{|A|}{2} + A$\\
+A > 0: $\frac{A}{2} < x_n < \frac{3A}{2} \Rightarrow |x_n| > \frac{A}{2} = \frac{|A|}{2} = r$\\
+A < 0: $\frac{3A}{2} < x_n < \frac{A}{2} \Rightarrow -x_n > -\frac{A}{2} \Leftrightarrow |x_n| > \frac{|A|}{2} = r$\\
+\underline{Лемма2} Если $\{x_n\}$ сходящаяся и не бесконечно малая, то $\frac{1}{x_n}$ - ограниченна($|x_n| < r \Rightarrow |\frac{1}{x_n}| < \frac{1}{r}$)\\
+\underline{Теорема4.} $\displaystyle{\lim_{n \to \infty}}x_n = A \And \lim_{n \to \infty}  y_n = B$ тогда $\displaystyle{\lim_{n \to \infty}}(\frac{x_n}{y_n}) = \frac{A}{B} \; (\{x_n\}, \{y_n\}$ - не бесконечно малые)\\
+\underline{Доказательство}:\\
+по Лемме1 $\exists \; r>0 \; \exists N \; \forall n \geq N \; |y_n| > r$\\
+$x_n = \alpha_n + A \And y_n = \beta_n + B$\\
+Рассмотрим $\frac{x_n}{y_n} - \frac{A}{B} = \frac{x_n B - y_n A}{y_n B} = \frac{1}{B} \frac{1}{y_n}(x_n B - y_n A) = \gamma_n$ - бесконечно малая\\ 
+$\frac{1}{B} - const \And \frac{1}{y_n}$ - ограниченна по Лемме2\\
+Рассмотрим $z_n = -x_n B - y_n A = BA - AB = 0$\\
+тогда $\displaystyle{\lim_{n \to \infty}}(\frac{x_n}{y_n}) = \frac{A}{B}$\\
+\\
+\\
+\\
+\\
+\\
+\\
+\section{Предел отношения многочленов}
+P(n) многочлен, deg P(n) = k\\
+Q(n) многочлен, deg Q(n) = l\\
+$\displaystyle{\lim_{n \to \infty}}(\frac{p(n)}{Q(n)}) = \frac{\displaystyle{\lim_{n \to \infty}}(a_0 n^k +...+a_n)}{\displaystyle{\lim_{n \to \infty}}(b_0 n^l +...+b_l)}$\\
+Если k = l: $\displaystyle{\lim_{n \to \infty}}(\frac{P(n)}{Q(n)}) = \frac{a_0}{b_0}$\\
+Если k < l: $\displaystyle{\lim_{n \to \infty}}(\frac{P(n)}{Q(n)}) = 0$\\
+Если k > l: $\displaystyle{\lim_{n \to \infty}}(\frac{P(n)}{Q(n)}) = \infty$\\
+\underline{Доказательство}:\\
+$\displaystyle{\lim_{n \to \infty}}(\frac{p(n)}{Q(n)}) = \lim_{n \to \infty}(\frac{a_0 + \frac{a_1}{n} +...+\frac{a_k}{n^k}}{b_0 n^{l-k}+...+\frac{b_l}{n^k}})$\\
+Если k = l: $\displaystyle{\lim_{n \to \infty}}(\frac{P(n)}{Q(n)}) = \frac{a_0}{b_0}$\\
+Если k < l, l - k > 0: $\displaystyle{\lim_{n \to \infty}}(\frac{P(n)}{Q(n)}) = 0$ (сходящаяся/бесконечно большая -> бесконечно малая)\\
+Если k > l, l - k < 0: $\displaystyle{\lim_{n \to \infty}}(\frac{P(n)}{Q(n)}) = \infty$(сходящаяся/бесконечно малая -> бесконечно большая)\\
+\section{Сходимость последовательностей $(1 +\frac{1}{n})^n$, $(1 - \frac{1}{n})^n$, $c^{\frac{1}{n}}$, $n^{\frac{1}{n}}$}
+\underline{Теорема1.} $\forall c>0 \; c = const \; \displaystyle{\lim_{n \to \infty}}c^{\frac{1}{n}} = 1$\\
+\underline{Доказательство}:\\
+1)c = 1 выполняется\\
+2)c > 1 $\Leftrightarrow c^{\frac{1}{n}} > 1$\\
+Пусть $\alpha_n = c^{\frac{1}{n}} - 1 > 0$ тогда $c^{\frac{1}{n}} = \alpha_n + 1 \Leftrightarrow\\ c = (1 + \alpha_n)^n \geq 1 + \alpha_n n > n \alpha_n$(первое нераверавенство - неравенство Бернулли)\\
+т. о. 0 <$\alpha_n  <\frac{c}{n} \Rightarrow \displaystyle{\lim_{n \to \infty}}\alpha_n = 0$(теорема о сжатой переменной) $\Rightarrow \displaystyle{\lim_{n \to \infty}}c^{\frac{1}{n}}$\\
+3)c < 1 $\displaystyle{\lim_{n \to \infty}}c^{\frac{1}{n}} = \lim_{n \to \infty}\frac{1}{(\frac{1}{c})^{\frac{1}{n}}} = \frac{1}{\displaystyle{\lim_{n \to \infty}}(\frac{1}{c})^{\frac{1}{n}}} = 1$\\
+\\
+\\
+\\
+\underline{Теорема2.} $\displaystyle{\lim_{n \to \infty}}n^{\frac{1}{n}} = 1$\\
+\underline{Лемма} $ \forall x>0: (1 + x)^n > \frac{(n-1)n}{2}x^2$\\
+\underline{Доказательство Леммы}\\
+ММИ/расписать через бином Ньютона\\
+\underline{Доказательство теоремы}:\\
+n > 1 $\Rightarrow \sqrt[n]{n} > 1$\\
+Пусть $\alpha_n = n^{\frac{1}{n}} - 1 > 0 \Leftrightarrow n^{\frac{1}{n}} = 1 + \alpha_n \Leftrightarrow n = (1 + \alpha_n)^n>\frac{n(n - 1)}{2}\alpha_n ^2$(Лемма2)\\
+$n-1 \geq \frac{n}{2} \Rightarrow n > \frac{n(n - 1)}{2} \alpha_n ^2 > \frac{n^2}{4}\alpha_n ^2$
+Итого: $0 < \alpha_n < \frac{2}{\sqrt{n}} \Rightarrow \displaystyle{\lim_{n \to \infty}}\alpha_n = 0 \Rightarrow \lim_{n \to \infty}n^{\frac{1}{n}} = 1$\\
+\underline{Теорема3.}$ \; x_n = (1 + \frac{1}{n})^n$ сходится\\
+\underline{Доказательство}:\\
+Рассмотрим $y_n = (1 + \frac{1}{n})^{n + 1}$ Докажем, что $\{y_n\} \downarrow$\\
+Рассмотрим $\frac{y_{n - 1}}{y_n} = \frac{(1 + \frac{1}{n - 1})^n}{(1 + \frac{1}{n})^{n + 1}}= \frac{(\frac{n}{n - 1})^n}{(\frac{n + 1}{n})^{n + 1}} = \frac{n^2}{n^2 - 1}^2 \frac{n - 1}{n} = (1 + \frac{1}{n^2 - 1})^{n + 1}\frac{n - 1}{n} \geq (1 + \frac{1}{n - 1}) \frac{n - 1}{n} = \frac{n}{n - 1} \frac{n - 1}{n} = 1$(первое неравенство - Неравенство Бернулли)\\
+т. е. $\frac{y_n - 1}{y_n} > 1$\\
+т. е. $\{y_n\}$ убывает и ограниченна снизу тогда по теореме Вейерштрассе $ \exists \displaystyle{\lim_{n \to \infty}}x_n \; \; \lim_{n \to \infty}x_n = \lim_{n \to \infty}\frac{y_n}{1 + \frac{1}{n}} =\frac{\lim_{n \to \infty}y_n}{\displaystyle{\lim_{n \to \infty}}(1 + \frac{1}{n})} = \lim_{n \to \infty}y_n$\\
+$\boxed{\displaystyle\lim_{n \to \infty}(1 + \frac{1}{n})^n} = e$ - число Эйлера\\
+/* e = 2,718281828... также можно вычислить как сумму ряда $\frac{1}{n!}$ */\\
+\underline{Теорема4.} $\displaystyle\lim_{n \to \infty}(1 - \frac{1}{n})^n = \frac{1}{e}$\\
+\underline{Доказательство}:\\
+$\displaystyle\lim_{n \to \infty}(1 - \frac{1}{n})^n = \displaystyle\lim_{n \to \infty}\frac{(1 - \frac{1}{n^2})^n}{(1 + \frac{1}{n})^n} =\frac{\displaystyle{\lim_{n \to \infty}}(1 - \frac{1}{n^2})^n}{\displaystyle{{\lim_{n \to \infty}}}(1 + \frac{1}{n})^n} = \frac{1}{e}$\\
+$a_n = (1 - \frac{1}{n^2}) \geq 1 - \frac{n}{n^2} = 1 - \frac{1}{n}$(первое неравенство - Бернулли)\\
+т. е. $1 - \frac{1}{n} \leq a_n \leq 1 \Rightarrow \displaystyle{\lim_{n \to \infty}}a_n = 1$\\
+\underline{Утв.} $\displaystyle{\lim_{n \to \infty}}x_n^{y_n} = e^{\displaystyle{\lim_{n \to \infty}}y_n}$\\
+\section{Подпоследовательность. Связь сходимости подпоследовательности со сходимостью последовательности}
+\underline{Опр.} Подпоследовательность $\{x_{n_{k}}\}$ для $\{x_n\}$ называется бесконечная последовательность $x_{n_{1}}, x_{n_{2}}..., x_{n_{k}}$(номера идут по возрастанию)\\
+\underline{Теорема1}Любая подпоследовательность сохраняет монотонность и её характер от исходной последовательности\\
+\underline{Доказательство}:\\
+...
+\section{Лемма о вложенных промежутках (2 варианта)}
+\underline{Лемма о вложенных промежутках.} Пусть даны $\{x_n\}$ возрастающая и $\{y_n\}$ убывающая и $\forall n \; x_n < y_n$ причём $\displaystyle{\lim_{n \to \infty}}|x_n - y_n| \rightarrow 0$ тогда $\exists \displaystyle{\lim_{n \to \infty}}x_n, \displaystyle{\lim_{n \to \infty}}y_n$ такие, что $\displaystyle{\lim_{n \to \infty}}x_n = \displaystyle{\lim_{n \to \infty}}y_n$\\
+\underline{Доказательство}:\\
+$\forall x_1 \leq x_n < y_n \leq y_1$\\
+$\{x_n\} \uparrow$ и ограниченна сверху $\Rightarrow$(по теореме Вейерштрассе) $\exists \displaystyle{\lim_{n \to \infty}}x_n$\\
+$\{y_n\} \downarrow$ и ограниченна снизу $\Rightarrow$(по теореме Вейерштрассе) $\exists \displaystyle{\lim_{n \to \infty}}y_n$\\
+Тогда $\displaystyle{\lim_{n \to \infty}}(y_n - x_n) = \displaystyle{\lim_{n \to \infty}}y_n - \displaystyle{\lim_{n \to \infty}}x_n = 0$\\
+\underline{Теорема Кантора о стягивающихся отрезках} Пусть имеется бесконечная последовательность вложенных промежутков($[x_1;y_1] \supset [x_2; y_2] \supset ... \supset [x_n;y_n] \supset ...$) причём $\displaystyle{\lim_{n \to \infty}}|x_n - y_n| = 0 \;$тогда $\exists ! C: \; \forall n \; C\in [x_n;y_n]$\\
+\underline{Доказательство}:\\
+1)существование\\
+$\{x_n\} \uparrow \Rightarrow \displaystyle{\lim_{n \to \infty}}x_n = sup\{x_n\} = C$\\
+$\{y_n\} \downarrow \Rightarrow \displaystyle{\lim_{n \to \infty}}y_n = Inf\{y_n\} = C$\\
+т. е $\forall n \; x_n \leq C \leq y_n$\\
+2)Единственность\\
+Пусть $\exists C_1 \neq C \And C_1 \in [x_n;y_n]$\\
+$\forall n: \; C \in [x_n;y_n] \Leftrightarrow x_n \leq C \leq y_n$(1)\\
+$\forall n: \; C_1 \in [x_n;y_n] \Leftrightarrow -y_n \leq -C_1 \leq -x_n$(2)\\
+Сложим (1) и (2): $x_n - y_n \leq C - C_1 \leq y_n - x_n$ тогда по теореме о сжатой переменной $\displaystyle{\lim_{n \to \infty}}(C - C_1) = 0$ и $C - C_1 - const \Rightarrow C- C_1 = 0 \Leftrightarrow C = C_1$\\
+\\
+\\
+\\
+\\
+\\
+\\
+\section{Теорема Больциано-Вейерштрассе}
+\underline{Теорема Больциано-Вейерштрассе} Из Любой ограниченной последовательности можно выделить сходящуюся подпоследовательность\\
+\underline{Доказательство}:(Методом Больциано - мотодом половинного деления)\\
+$\{x_n\}$ ограниченная $\Rightarrow \exists a, b \; \forall n \; a \leq x_n \leq$\\
+$[a_1;b_1] \supset [a;b] \; \; \; \; \;x_{n_1} \in [a_1;b_1]$\\
+$[a_2;b_2] \supset [a;b] \; \; \; \; \;x_{n_2} \in [a_2;b_2]$\\
+...\\
+$[a_n;b_n] \supset [a;b] \; \; \; \; \;x_{n_k} \in [a_nk;b_nk]$\\
+...\\
+$|a_n - b_n| = \frac{|a - b|}{2^n} \rightarrow 0 (n \rightarrow \infty) \Rightarrow$(по лемме о вложенных промежутках)$\exists ! C = \displaystyle{\lim_{n \to \infty} a_n} = \displaystyle{\lim_{n \to \infty}} b_n$\\
+т. е. $\forall k \; a_k \leq x_{n_k} \leq b_k \; \Rightarrow \displaystyle{\lim_{n \to \infty}}x_{n_k} = C$\\
+\section{Замечательный предел $\frac{sin \, x_n}{x_n}$}
+\underline{Теорема(первый замечательный предел)} $\displaystyle{\lim_{n \to \infty}} x_n = 0$ тогда $\displaystyle{\lim_{n \to \infty}} \frac{sin \, x_n}{x_n} = 1$\\
+\underline{Доказательство}:\\
+1)$x_n > 0 \; \displaystyle{\lim_{n \to \infty}}x_n = 0 \; \exists N: \; \forall n \geq N \; 0 < x_n < \frac{\pi}{2}$\\
+$sin \, x_n \leq x_n \leq tg \, x_n | \div sin \, x_n > 0 \Leftrightarrow 1 \leq \frac{x_n}{sin \, x_n} \leq \frac{x_n}{cos \, x_n} \; (\displaystyle{\lim_{n \to \infty}}x_n = 0 \Rightarrow \displaystyle{\lim_{n \to \infty}}cos \, x_n = 1)$ тогда по теореме о сжатой переменной $\displaystyle{\lim_{n \to \infty}} \frac{sin \, x_n}{x_n} = 1$\\
+2)$x_n < 0 \; \displaystyle{\lim_{n \to \infty}}x_n = 0 \; \exists N: \; \forall n \geq N \; -\frac{\pi}{2} < x_n < 0$\\
+$sin(-x_n) \leq - x_n \leq tg(-x_n) \Leftrightarrow -sin \, x_n \leq - x_n \leq -tg \, x_n | \div -sin \, x_n > 0$\\
+$\Leftrightarrow 0 \leq \frac{x_n}{sin \, x_n} \leq \frac{1}{cos \, x_n}$ тогда по теореме о сжатой переменной $$\displaystyle{\lim_{n \to \infty}} \frac{sin \, x_n}{x_n} = 1$$\\
+3)знакопеременная последовательность\\
+"докажем позже"...
+\end{document}
