@@ -1,0 +1,99 @@
+name: CI
+run-name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - .gitignore
+      - README*
+      - .github/**
+      - "!.github/workflows/main.yml"
+  workflow_dispatch:
+
+jobs:
+  build-typst:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Typst
+        uses: typst-community/setup-typst@v4
+        with:
+          typst-version: ^0.14
+          cache-dependency-path: ITMO/MA/requirements.typ
+
+      - run: typst --version
+
+      - run: typst compile ITMO/MA/main.typ
+      - run: typst compile ITMO/LA/main.typ
+      - run: typst compile ITMO/comp_arch/main.typ
+
+      - name: List generated PDFs
+        run: find ITMO -name "*.pdf" -exec ls -lh {} \;
+
+      - name: Upload Typst PDFs as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pdf-typst
+          path: |
+            ITMO/MA/main.pdf
+            ITMO/LA/main.pdf
+            ITMO/comp_arch/main.pdf
+
+  build-tex:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build PML30-MA1.pdf
+        uses: xu-cheng/latex-action@v3
+        with:
+          working_directory: PML30
+          root_file: PML30-MA1.tex
+
+      - name: Build PML30-MA2.pdf
+        uses: xu-cheng/latex-action@v3
+        with:
+          working_directory: PML30
+          root_file: PML30-MA2.tex
+
+      - name: Upload LaTeX PDFs as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pdf-tex
+          path: "PML30/*.pdf"
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build-typst, build-tex]
+    concurrency:
+      group: "pages"
+      cancel-in-progress: false
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v5
+        with:
+          pattern: "*"
+
+      - name: Prepare files for gh-pages
+        run: |
+          mkdir -p public
+          mkdir -p public/ITMO/MA public/ITMO/LA public/ITMO/comp_arch public/PML30
+          cp pdf-typst/ITMO/MA/main.pdf public/ITMO/MA/
+          cp pdf-typst/ITMO/LA/main.pdf public/ITMO/LA/
+          cp pdf-typst/ITMO/comp_arch/main.pdf public/ITMO/comp_arch/
+          cp pdf-tex/PML30/*.pdf public/PML30/
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          force_orphan: true
