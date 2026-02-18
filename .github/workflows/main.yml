@@ -65,11 +65,17 @@ jobs:
           working_directory: PML30
           root_file: PML30-MA2.tex
 
+      - name: Collect LaTeX PDFs
+        run: |
+          mkdir -p tex-pdfs
+          cp PML30/PML30-MA1.pdf tex-pdfs/
+          cp PML30/PML30-MA2.pdf tex-pdfs/
+
       - name: Upload LaTeX PDFs as artifact
         uses: actions/upload-artifact@v4
         with:
           name: pdf-tex
-          path: "PML30/*.pdf"
+          path: tex-pdfs
 
   deploy:
     runs-on: ubuntu-latest
@@ -96,8 +102,9 @@ jobs:
           cp pdf-typst/ITMO-LA.pdf public/ITMO/LA/main.pdf
           cp pdf-typst/ITMO-comp_arch.pdf public/ITMO/comp_arch/main.pdf
 
-          # LaTeX PDFs (структура pdf-tex сохраняет подкаталог PML30)
-          cp pdf-tex/PML30/*.pdf public/PML30/
+          # LaTeX PDFs: плоская папка с предсказуемыми именами
+          cp pdf-tex/PML30-MA1.pdf public/PML30/
+          cp pdf-tex/PML30-MA2.pdf public/PML30/
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
