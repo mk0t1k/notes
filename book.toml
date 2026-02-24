@@ -1,0 +1,14 @@
+[book]
+authors = ["mk0t1k"]
+language = "ru"
+multilingual = false
+src = "src"
+title = "Конспекты"
+
+[build]
+build-dir = "book"
+
+[output.html]
+default-theme = "ayu"
+mathjax-support = true
+git-repository-url = "https://github.com/mk0t1k/notes"

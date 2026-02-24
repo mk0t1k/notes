@@ -81,7 +81,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build-typst, build-tex]
     permissions:
-      contents: write 
+      contents: write
     concurrency:
       group: "pages"
       cancel-in-progress: false
@@ -94,17 +94,28 @@ jobs:
         with:
           pattern: "*"
 
+      - name: Install mdBook
+        run: |
+          curl -sSL "https://github.com/rust-lang/mdBook/releases/download/v0.4.36/mdbook-v0.4.36-x86_64-unknown-linux-gnu.tar.gz" | tar -xz -C /usr/local/bin
+          mdbook --version
+
+      - name: Build mdBook
+        run: mdbook build
+
       - name: Prepare files for gh-pages
         run: |
           set -e
           mkdir -p public/ITMO/MA public/ITMO/LA public/ITMO/comp_arch public/PML30
 
-          # Typst PDFs: берём из подготовленной папки с предсказуемыми именами
+          # Корень сайта — вывод mdBook
+          cp -r book/* public/
+
+          # Typst PDFs
           cp pdf-typst/ITMO-MA.pdf public/ITMO/MA/main.pdf
           cp pdf-typst/ITMO-LA.pdf public/ITMO/LA/main.pdf
           cp pdf-typst/ITMO-comp_arch.pdf public/ITMO/comp_arch/main.pdf
 
-          # LaTeX PDFs: плоская папка с предсказуемыми именами
+          # LaTeX PDFs
           cp pdf-tex/PML30-MA1.pdf public/PML30/
           cp pdf-tex/PML30-MA2.pdf public/PML30/
 
