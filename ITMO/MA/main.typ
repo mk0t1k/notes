@@ -1,4 +1,5 @@
 #import "requirements.typ": *
+#import "common.typ": *
 
 #set text(lang: "rus")
 #set page(
@@ -61,6 +62,9 @@
     #v(3em)
 
     #text(size: 14pt)[Написан: Коткин Михаил, M3100]\
+    
+    #v(40em)
+    #text(size: 9pt, fill: rgb("#b7b4b4"))[скомпилировано в #datetime.today().display() c https://github.com/mk0t1k/notes]\
 ]
 
 #pagebreak()
@@ -193,3 +197,297 @@ $ integral e^x cos(x) d x = "Re"(integral e^(x(i + 1))) = "Re"(1/(1 + i)e^(x(1 +
 
 
 == Интегрирование рациональных дробей
+
+$Blue(underline("Определение:"))$ рациональная функция это $R(x) = (P_m (x))/(Q_n (x))$, где $P_m (x), Q_n (x)$ - многочлены\
+1) $m < n: R(x)$ - правильная дробь\
+2) $m >= n: R(x)$ - неправильная дробь\ 
+
+#theorem(
+  style: styles.thmbox,
+)[][Любая рациональная дробь может быть представлена в виде суммы элементарных дробей вида:
+  #table(
+  columns: 2,
+  stroke: none,
+  [$I: A/(x - a) $], [$I I: A/(x - a)^k $],
+  [$I I I: (A x + B)/(x^2 +p x + q), D < 0 $], [$I V: (A x + B)/(x^2 +p x + q)^k, D < 0, k > 1 $]
+  )
+]
+=== Интегрирование дробей I типа
+$ integral A/(x - a) d x = A ln(|x - a|) + C $
+#underline("Пример:") (Метод неопределённых коэффицентов)\
+$ integral (x + 1)/(x^2 + 4x - 5) d x $
+Рассмотрим подынтегральное выражение: $ (x + 1)/(x^2 + 4x - 5) = (x + 1)/((x - 1)(x + 5)) = (A/(x - 1) + B/(x + 5)) = (A(x + 5) + B(x - 1))/((x - 1)(x + 5)) $\
+$x + 1 = A(x + 5) + B(x - 1) $ Для любых значений $x$, подставим удобные, чтобы найти $A$ и $B$:\
+$x = -5: -4 = -6 B <=>  B = 2/3$ \
+$x = 1: 2 = 6A <=>  A = 1/3$ \
+$ integral (x + 1)/(x^2 + 4x - 5) d x = integral (A/(x - 1) + B/(x + 5)) d x = integral (1/3/(x - 1) + 2/3/(x + 5)) d x = 1/3 ln|x - 1| + 2/3 ln|x + 5| + C $
+==== Метод Ховесайда
+Если знаменатель раскладывается на линейные множители в 1 степени, то $ R(x) = (P(x))/((x - a_1)...(x - a_n)) = (A_1)/(x - a_1) + ... + (A_n)/(x - a_n) $
+$ "Где" A_i = lim_(x -> a_i) (P(x))/(Q(x)) (x - a_i) = P(a_i)/(П_(i != j) (a_j - a_i)) = P(a_i)/(Q'(a_i)) $
+*#underline("Доказательство:")*\
+$ R(x) = (P(x))/((x - a_1)...(x - a_n)) = (A_1)/(x - a_1) + ... + (A_n)/(x - a_n) | * (x - a_i) $
+$ (P(x))/((x - a_1)...(x - a_(i - 1))(x - a_(i + 1))...(x - a_n)) = (A_1 (x - a_i))/(x - a_1) + ... + A_i + ... + (A_n (x - a_i))/(x - a_n) $
+Перенесём все влево и подставим $x = a_i$ так как это равенство должно быть верно для любых $x$, все слагаемые $(A_k (x - a_i))/(x - a_k)$ станут нулями и мы получим нашу формулу.\
+#underline("Пример:")\
+$ integral (x^2 + 2x + 6)/((x - 1)(x - 2)(x - 4)) d x = integral (A/(x - 1) + B/(x - 2) + C/(x - 4)) d x = 3ln|x - 1| - 7ln|x - 2| + 5ln|x - 4| + C $
+$A = (1 + 2 * 1 + 6)/((1 - 2)(1 - 4)) = 3$ #h(3em)
+$B = (4 + 2 * 2 + 6)/((2 - 1)(2 - 4)) = -7$ #h(3em)
+$C = (16 + 2 * 4 + 6)/((4 - 1)(4 - 2)) = 5$
+=== Интегрирование дробей II типа
+$ integral (d x)/(x - a)^k = integral (d (x - a))/(x - a)^k = (x - a)^(-k + 1)/(-k + 1) + C $
+=== Интегрирование дробей III типа
+$ integral (A x + B)/(x^2 + p x + q) d x eq.o $
+#underline("Алгоритм двух шагов"):\
+1 Шаг: выделение производной знаменателя в числителе\
+  $A x + B = A/2 (2x + p) + underbrace(B - p A/2, r)$\
+2 Шаг: интегрирование полученных частей\
+  $ eq.o integral (A/2(2x + p) + r)/(x^2 + p x + q) d x = A/2 integral (d(x^2 + p x + q))/(x^2 + p x + q) + integral r/(x^2 + p x + q) d x = A/2 ln|x^2 + p x + q| + r integral 1/((x + p/2)^2 + underbrace(q - (p^2)/4, a^2)) $\
+  $ = A/2 ln|x^2 + p x + q| + r/a "arctg"((x + p/2)/a) + C $
+#underline("Пример:")
+$ integral (x + 1)/(x^2 + 2x + 5) d x = 1/2 integral (2x + 2)/(x^2 + 2x + 5) d x = 1/2 ln(x^2 + 2x + 5) + C $
+=== Интегрирование дробей IV типа
+$ J_k = integral (A x + B)/(x^2 + p x + q) d x eq.o #h(3em) k > 1, D < 0 $
+1 Шаг: выделение производной знаменателя в числителе\
+  $A x + B = A/2 (2x + p) + underbrace(B - p A/2, r)$\
+  $ J_n = A/2 integral (d(x^2 + p x + q))/(x^2 + p x + q)^k + underbrace(integral (d x)/(x^2 + p x + q)^k, I_n) = A/(2(-k + 1)) 1/(x^2 + p x + q)^(k+ 1) + I_n $\
+2 Шаг:\
+  $ I_n = integral (d x)/(x^2 + p x + q)^k = integral (d x)/(underbrace((x + p/2)^2, t^2) + underbrace(q - p^2/4, a^2))^k $
+3 Шаг: рекурентная формула\
+  $ I_n = integral (d t)(t^2 + a^2)^k = 1/a^2 integral ((a^2 + t^2) - t^2)/(t^2 + a^2)^k d t = 1/a^2 integral (d t)/(t^2 + a^2)^(k - 1) - 1/a^2 underbrace(integral t^2/(t^2 + a^2)^k d t, "можно интегрировать по частям") $
+  $ integral t^2/(t^2 + a^2)^k d t = mat(delim: "[", u = t; d v = t/(t^2 + a^2)^k d t ) = ... $\
+  $ I_n = 1/a^2 (2n - 3)/(2n - 2) * I_(n - 1) + t/(2(n - 1)(t^2 + a^2)^(n - 1)) $
+#underline("Замечание:") Неплохое упаражение, но эту формулы мы использовать не будем :)\
+#underline("Пример:")
+  $ integral (d x)/(x^2 + 1)^2 = 1/2 I_1 + x/(2(x^2 + 1)) = 1/2 "arctg"(x) + x/(2(x^2 + 1)) + C $\
+  $ n = 2 #h(3em) a = 1 $\
+==== Метод Остроградского
+Применяется при наличии кратных корней в знаменателе $Q(x)$
+$ integral P(x)/Q(x) d x = (P_1 (x))/(Q_1 (x)) + integral (P_2 (x))/(Q_2 (x)) d x $
+$ P(x)/Q(x) = ((P_1 (x))/(Q_1 (x)))' + (P_2 (x))/(Q_2 (x)) $
+Часто удобно использовать в такой форме, получили ее просто взяв производную от обеих частей\
+Где $Q_1 (x)$ = НОД$(Q(x), Q'(x))$ многочлен содержащий все кратные множители знаменателя, но в степени на 1 меньше\
+$Q_2 (x) = Q(x)/(Q_1 (x))$ многочлен содержит все множители знаменателя в степени 1(без кратности)\
+$P_1 (x)$ и $P_2 (x)$ многочлены степени на 1 меньше чем $Q_1 (x)$ и $Q_2 (x)$ соответственно ищутся методом неопределённых коэфицентов. \
+#underline("Пример:")\
+$ integral (d x)/(x^2 + 1)^2 = (A x + B)/(x^2 + 1) + integral (C x + D)/(x^2 + 1) d x $
+$ 1/(x^2 + 1)^2 = ((A x + B)/(x^2 + 1))' + (C x + D)/(x^2 + 1) $
+$ 1 = A(x^2 + 1) - 2x(A x + B) + (C x + D)(x^2 + 1) $ 
+Многочлены тождественно равны(то есть равны при всех $x$) если у них с овпадают все коэфиценты.
+#align(center)[
+#table(
+  columns: 3,
+  stroke: none,
+  table.hline(y: 1),
+  table.hline(y: 2),
+  table.hline(y: 3),
+  table.vline(x: 1),
+  table.vline(x: 2),
+  [$x^3$], [$C$], [$0$],
+  [$x^2$], [$-A + D$], [$0$],
+  [$x$], [$-2B + C$], [$0$],
+  [$x^0$], [$A + D$], [$1$],
+)
+  Из таблички получаем, что $A = 1/2 #h(3em) B = 0 #h(3em) C = 0 #h(3em) D = 1/2$
+]
+Вернёмся к изначальному интегралу: $ integral (d x)/(x^2 + 1)^2 = (A x + B)/(x^2 + 1) + integral (C x + D)/(x^2 + 1) d x = (1/2 x) / (x^2 + 1) + integral (1/2 x) / (x^2 + 1) d x = 1 / 2 1/(x^2 + 1) + 1/2 "arctg"(x) + C $
+
+== Интегрирование тригонометрических функций
+$ integral R(cos x, sin x) d x #h(0.5em) (*) #h(3em) R - "универсальная функция" $\
+#underline("Универсальная тригонометрическая подстановка")\
+Сводит любой интеграл вида $(*)$ к интегралу от рациональной функции\
+#align(left)[
+#table(
+  stroke: none,
+  columns: 1,
+  [$ t = tg(x/2), x in (-pi/2; pi/2) $],
+  [$ sin x = (2t)/(1 + t^2) $],
+  [$ cos x = (1 - t^2)/(1 + t^2) $],
+  [$ t = tg(x/2) => x = 2 "arctg"(t) "тогда" d x = 2/(1 + t^2) d t $]
+)
+]
+#underline("Быстрые подстановки"):
++ Нечётность по $sin x : R(cos x, -sin x) = -R(cos x, sin x)$\
+  Делаем замену $t = cos x #h(3em) d t = -sin x d x$\
+  #underline("Пример:")\
+  $ integral (d x)/(sin x) = mat(delim: "[", t = cos x; d t = -sin x d x ) = - integral (d t)/(1 - t^2) = integral (d t)/(t^2 - 1) = 1 / 2 ln lr(|(t - 1)/(t + 1)|) + C = 1 / 2 ln lr(|(cos x - 1)/(cos x + 1)|) + C $
++ Нечётность по $cos x : R(-cos x, sin x) = -R(cos x, sin x)$\
+  Делаем замену $t = sin x #h(3em) d t = cos x d x$
++ Чётность по совокупности $R(-sin x, -cos x) = R(sin x, cos x)$
+  #align(left)[
+  #table(
+  stroke: none,
+  columns: 1,
+  [$ t = tg(x) $],
+  [$ sin x = (t^2)/(1 + t^2) $],
+  [$ cos x = 1/(1 + t^2) $],
+  [$ t = tg(x) => x =  "arctg"(t) "тогда" d x = 1/(1 + t^2) d t $]
+  )
+  ]
++ 
+  #place(left)[
+  $ integral sin^m x * cos^n x d x $\ ]
+  \
+  \
+  А) Хотя бы одна из степеней нечётная\
+  Отрываем от нечётной степени один множитель, две степени - чётные, а то, что оторвали заносим под знак интеграла\
+  #underline("Пример:")\
+  $ integral sin^3 x d x = integral sin^2 x * underbrace(sin x x d x, - d(cos x)) = - integral sin^2 x d(cos x) = - integral (1 - cos^2) d(cos x) = (cos^3 x)/3 - cos x + C $
+  Б) Обе степени чётные\
+  Используем следующие формулы:
+  #align(left)[
+  #table(
+  stroke: none,
+  columns: 1,
+  [$ cos^2 x = (1 + cos 2 x)/2 $],
+  [$ sin^2 x = (1 - cos 2 x)/2 $],
+  [$ sin x = 2 sin x/2 cos x/2 $],
+  )
+  ]
+  #underline("Пример:")\
+  _1 способ:_\
+  $ integral (d x)/(sin^3 x cos x) = integral 1/(tg^3 x cos^4 x) = mat(delim: "[", t = tg x; d t = (d x)/(1 + t^2) ) = integral ((d t)/(1 + t^2))/(t^3 1/(1 + t^2)^2) = integral ((1 + t^2) d t)/t^3 = 1/(2t^2) + ln|t| + C = - 1/2 1/(tg^2 x) + ln|tg x| + C $
+  _2 способ:_\
+  $ integral (d x)/(sin^3 x cos x) = integral (sin^2 x + cos^2 x)/(sin^3 x cos x) d x = integral ((cos x)/(sin^3 x) + 1/(cos x sin x)) d x = integral (d(sin x))/(sin^3 x) + 1/2 ln lr(|(cos 2x - 1)/(cos 2x + 1)|) + C = $ $ = -1/2 1/(sin^2 x) + 1/2 ln lr(|(cos 2x - 1)/(cos 2x + 1)|) $
+  _(тут мы воспользовались результатом из примера к блоку нечётность по $sin x$)_\
++ Реккурентные формулы (понижения степени)
+  $ "Нужны для решения чего-то такого" I_n = integral sin^n x #h(0.2em) d x "или" I_n = integral 1/(sin^n x) d x $ 
+  $ I_n = integral sin x sin^(n - 1) x #h(0.2em) d x = 
+  mat(delim: "[",
+  u = sin^(n - 1) x; 
+  d v = sin x #h(0.2em) d x;
+  d u = (n - 1) sin^(n - 2) x cos x d x;
+  v = -cos x )
+  = -sin^(n - 1) x cos x + integral cos^2 x * (n - 1) sin^(n - 2) #h(0.2em) d x $
+  $ = -sin^(n - 1) x cos x + (n - 1) integral (1 - sin^2 x) sin^(n - 2) #h(0.2em) d x = -sin^(n - 1) x cos x + (n- 1)(underbrace(integral sin^(n - 2) x #h(0.2em) d x, I_(n-2)) - underbrace(integral sin^n x #h(0.2em) d x, I_n)) $
+  то есть
+  $ I_n = -sin^(n - 1) x cos x + (n- 1)(I_(n-2) - I_n) => I_n = 1/n (-sin^(n - 1) x cos x + (n - 1) * I_(n - 2)) $
+  и так сводим к 1 и 2 степени, которые мы умеем решать...\
+== Интегрирование гиперболических функций
+#Block[
+  Вспомним: $ "ch"(x) = (e^x + e^(-x))/2 #h(5em) "sh"(x) = (e^x - e^(-x))/2 #h(5em) "ch"^2 x - "sh"^2 x = 1 $
+  $ "ch" 2x = "ch"^2 x + "sh"^2 x #h(5em) 2 "ch"^2 x = "ch" 2 x + 1 $
+]
+_Методы интегрирования:_\
++ универсальная подстановка\
+  #align(left)[
+  #table(
+  stroke: none,
+  columns: 1,
+  [$ t = "th" x/2 $],
+  [$ "sh" x = (2t)/(1 + t^2) $],
+  [$ "ch" x = (1 - t^2)/(1 + t^2) $],
+  [$ t = "th" x/2 => x = 2 "arcth" t "тогда" d x = "arcth"' t #h(0.2em) d t $]
+  )
+  ]
++ чётность/нечётность
+  Используем замену $t = "sh" x "/" "ch" x$\
++ Использование определения (сводим к экспонентам)
+#underline("Пример:")\
+$ integral sqrt(1 + "sh"^2 x) d x = integral "ch" x #h(0.2em) d x = "sh" x + C $
+#Comment(color: rgb("#e8d0e6"))[
+  *Fun Fact*
+  $ integral sqrt(1 + (f'(x))^2) d x "- формула для вычисления дуги кривой f(x)" $
+  А в данном случае мы считали формулу для длины дуги цепной линии (то есть форма упругой и нерастяжимой тяжёлой нити(цепи) с закреплёнными концами в однородном гравитационном поле)
+]
+_Гиперболическая подстановка_\
+Мы в выражении, где не было гиперболических функций делаем замену с использованием гиперболических функций\
+#underline("Пример:")\
+$ integral sqrt(x^2 + a^2) d x = mat(delim: "[", x = a "sh" t; t = ("arcsh" x/a)/2; d x = a "ch" t d t ) = integral sqrt((a "sh" t)^2 + a^2) d x = a integral sqrt("sh"^2 x + 1) d x = a "ch" t + C = a "ch" ("arcsh" x/a)/2 + C $
+== Интегрирование ирроциональных функций
+При $ integral R(x, root(n, (a x + b)/(c x + d))) d x $ выгодно сделать замену $ t = root(n, (a x + b)/(c x + d)) $ а дальше выразить $x$ через $t$.\
+#underline("Пример:")\
+$ integral 1/(1 + x)^2 sqrt((1 - x)/(1 + x)) = mat(delim: "[", t = sqrt((1 - x)/(1 + x)); x = (1 - t^2)/(1 + t^2); d x = (-4t)/(1 + t^2)^2 d t) = - integral (1 + t^2)^2/4 t (4t)/(1 + t^2)^2 d t = - integral t^2 d t = -1/3 t^3 + C = -1/3 sqrt(((1 - x)/(1 + x))^3) + C $
+== Квадратичные ирроциональности. Подстановки Эйлера
+$ integral R(x, sqrt(a x^2 + b x + c)) d x $
+_Подстановки Эйлера:_
++ При $a > 0:$
+  $ sqrt(a x^2 + b x + c) = plus.minus sqrt(a) x + t $
++ При $c > 0$
+  $ sqrt(a x^2 + b x + c) = t x plus.minus sqrt(t) $
++ При $D > 0$
+  $ sqrt(a x^2 + b x + c) = sqrt(a (x - x_1)(x - x_2)) = t (x - x_1) $
+#underline("Замечание:") Иногда может подходить несколько подстановок, тогда используем любую.\
+#underline("Пример:")$""_1$\
+$ integral (d x)/(x + sqrt(x^2 + x + 1)) = 
+mat(delim: "[", sqrt(x^2 + x + 1) = - x + t;
+x = (t^2 - 1)/(2t + 1);
+d x = 2(t^2 + t + 1)/(2t + 1)^2 d t)
+= integral (d x)/(x - x + t) = 2 integral (t^2 + t + 1)/(t(2t + 1)^2) d t = 2 integral (A/t + B/(2t + 1) + (C x + D)/(2t + 1)^2) d x eq.o $
+Найдём коэффиценты:\
+$ t^2 + t + 1 = A(2t + 1)^2 + B t(2t+1) + (C t + D)t $
+$t = 0: A = 1$\
+$t = -1/2: -1/4 C - 1/2 D = 3/4$\
+$t = -1: B + C - D = 0 $\
+$t = 1: 3B + C + D = 0$\
+тогда $A = 1 #h(3em) B = -3/2 #h(3em) C = 0 #h(3em) D = -3/2$
+$ eq.o 2ln|t| - 3/2ln|2t + 1| + 3/2 1/(2t + 1) + C = 2ln lr(|sqrt(x^2 + x + 1) + x|) - 3/2 ln lr(|2sqrt(x^2 + x + 1) + 2x + 1|) + 3/2 1/(2sqrt(x^2 + x + 1) + 2x + 1) + C $
+#underline("Пример:")$""_2$\
+_1 способ:_
+$ integral (d x)/sqrt(x^2 - 1) = mat(delim: "[", sqrt((x - 1)(x + 1)) = t(x - 1); x = (t^2 + 1)/(t^2 - 1); d x = (4t)/(t^2 - 1) d t) = integral (d x)/(t((t^2 + 1)/(t^2 - 1) - 1)) = - integral (2 d t)/(t^2 - 1) = -ln lr(|(t - 1)/(t + 1)|) + C = -ln lr(|(sqrt((x - 1)/(x + 1)) - 1)/(sqrt((x - 1)/(x + 1)) + 1)|) + C $
+_2 способ:(гиперболическая замена)_
+$ integral (d x)/sqrt(x^2 - 1) = mat(delim: "[", x = "ch" t; d x = "sh" t #h(0.2em) d t) = integral ("sh" t #h(0.2em) d t)/("sh" t) = t + C = "arcsh" x + C $
+== Теорема Чебышёва
+$Blue(underline("Определение:"))$ $x^m (a + b x^n)^p$ - интегральный бином, $m, n, p in QQ$
+#theorem(
+  style: styles.thmbox,
+)[][ 
+  Интеграл от дифференцируемого бинома выражается через комбинацию элементарных функцию в трёх случаях:
+  #table(
+    stroke: none,
+    columns: 1,
+    [1. $p in ZZ:$ делаем замену $x = t^k$, где $k$ общий знаментель $m$ и $n$(НОК)],
+    [2. $ (m + 1)/ n in ZZ: "делаем замену" a + b x^n = t^k, "где" k - "знаменатель дроби" p $], 
+    [3. $ (m + 1)/ n + p in ZZ: "делаем замену" t^k = a x^(-n) + b, "где" k - "знаменатель дроби" p $]
+  )
+]
+#underline("Пример:")$""_1$:\
+$ integral sqrt(1 + x^2) d x #h(7em) p = 1/2 #h(4em) a = b = 1 #h(4em) n = 3 #h(4em) m = 0 $
+#align(left)[
+  #table(
+    stroke: none,
+    columns: 1,
+    [$ p = 1/2 in.not ZZ $],
+    [$ (0 + 1)/3 in.not ZZ $],
+    [$ (0 + 1)/3 + 1/2 in.not ZZ $]
+  )
+]
+Тогда по теореме Чебышёва интеграл не берётся.\
+#underline("Пример:")$""_2$:\
+$ integral root(3, 1 + root(4, x))/sqrt(x) d x = integral x^(-1/2) (1 + x^(1/4))^(1/3) d x = mat(delim: "[", 1 + x^(1/4) = t^3; (t^3 - 1)^2 = x^1/2) = integral t^3(t^3 - 1)^2 4(t^3 - 1)^3 3t^2 d t = 12 integral (t^6 - t^3) d t = 12/7 t^7 - 3t^4 + C = 12/7 (1 + x^(1/4))^(7/3) - 3(1 + x^(1/4))^(4/3) + C $
+= Определённый интеграл
+Рассмотрим функцию $f(x) >=$ на $[a;b]$\
+Разобьём $[a;b]$ точками $x_i: a = x_0 < x_1 < ... < x_n = b$, ${x_n}$ - разбиение отрезка, назовём его $Tau$\
+Возьмём $xi_i in [x_i; x_(i + 1)]$ - произвольная точка на отрезке.\
+$Delta x_i = x_(i + 1) - x_i$\
+$Blue(underline("Определение:"))$ Интегральная сумма Римана для $f(x)$ на $[a;b]$ называется сумма $ sigma = sum_(i = 0)^(n-1) f(x_i) * Delta x_i $
+
+#import "@preview/cetz:0.4.2": *
+#import "@preview/cetz-plot:0.1.3": *
+#canvas(length: 5cm, {
+      import draw: *
+      plot.plot(
+        size: (1.5, 0.6),
+        x-min: 0.1, x-max: 2,
+        y-min: 0, y-max: 4,
+        x-label: [x], y-label: [y],
+        axis-style: "school-book",
+        x-tick-step: none,
+        y-tick-step: none,
+        x-ticks: (), y-ticks: (),
+        x-position: 2, y-position: 1,
+        {
+          plot.add((x) => calc.pow(x, 1.6) + 0.4, domain: (0.2, 4))
+          plot.add(
+            ((0.2, 0), (2, 0)),
+            mark: "circle",
+            mark-size: 8pt,
+            style: (stroke: none),
+          )
+          plot.annotate(resize: false, {
+            content((2, 0), [$x_n$], anchor: "south-west")
+            content((0.2, 0), [$x_0$])
+          })
+        }
+      )
+    })
+TODO: картинка для определённого интеграла
